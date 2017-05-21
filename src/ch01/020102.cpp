@@ -1,0 +1,1 @@
+int64 lcm(int64 a, int64 b) { return a / gcd(a, b) * b; }

@@ -1,0 +1,181 @@
+\clearpage\chapter{其他}
+
+%---------------------------------------
+\section{输入输出外挂}\small
+%---------------------------------------
+用于加速整数的输入输出，主要应对较大的数据量.
+\lstinputlisting[language={C++}]{./src/ch99/01.cpp}
+
+
+%---------------------------------------
+\section{高精度}\small
+%---------------------------------------
+一般最好使用Java，因为可以省去大量的码代码的时间.不到万不得已不要用完全
+大数模板.
+
+
+%---------------------------------------
+    \subsection{大数模板}\small
+%---------------------------------------
+大数模板，根据需要添加函数.
+\lstinputlisting[language={C++}]{./src/ch99/02.cpp}
+
+
+%---------------------------------------
+    \subsection{Java BigInteger}\small
+%---------------------------------------
+利用Java来处理大数问题是一件很轻松愉快的事情，不仅写起来简单方便，而且能
+够省去大量的调试时间.不过运算函数最好全部写成函数名调用，尽量不要直接使
+用运算符调用.
+
+数据定义与输入输出
+\begin{longtable}{|p{6.2cm}|p{2.7cm}|p{6.2cm}|}
+\hline
+方法 & 接收参数 & 作用 \\
+\hline
+ BigInteger n = new BigInteger(val) & String, int, void & 新建一个值为val的大数 \\
+\hline
+ BigInteger n = new BigInteger(val, radix) & String, int & 新建一个在radix进制下的值为val的大数 \\
+\hline
+ Scanner cin = Scanner(System.in); & & 读入一个大数 \\
+ n = cin.nextBigInteger(); & & \\
+\hline
+ System.out.print(n); & & 输出大数n \\
+\hline
+ System.out.println(n); & & 输出大数n并且换行 \\
+\hline
+ System.out.printf("\%d$\backslash$n", n); & & 类似C++格式化输出大数n \\
+\hline
+\end{longtable}
+
+基本常量与方法 
+\begin{longtable}{|p{6.2cm}|p{2.7cm}|p{6.2cm}|}
+\hline
+方法 & 接收参数 & 作用 \\
+\hline
+ BigInteger.ONE & & 常量，值为1 \\
+\hline
+ BigInteger.TEN & & 常量，值为10 \\
+\hline
+ BigInteger.ZERO & & 常量，值为0 \\
+\hline
+ String toString() & void & 返回10进制下的字符串表示形式 \\
+\hline
+ String toString(radix) & int & 返回基于radix进制下的字符串表示形式 \\
+\hline
+ BigInteger valueOf(val) & long, int & 将val的值赋给this \\
+\hline
+ int compareTo(val) & BigInteger & 根据小于、等于或大于val返回-1， 0， 1 \\
+\hline
+ boolean equals(x) & Object & 判断是否与指定的Object相等 \\
+\hline
+\end{longtable}
+
+运算方法
+\begin{longtable}{|p{6.2cm}|p{2.7cm}|p{6.2cm}|}
+\hline
+ 方法 & 接收参数 & 作用 \\
+\hline
+ BigInteger abs() & void & 返回其绝对值 \\
+\hline
+ BigInteger negate() & void & 返回其相反数 \\
+\hline
+ int signum() & void & 返回其符号函数 \\
+\hline
+ BigInteger add(val) & BigInteger & 返回一值为(this + val)的大数 \\
+\hline
+ BigInteger subtract(val) & BigInteger & 返回一值为(this - val)的大数 \\
+\hline
+ BigInteger muliply(val) & BigInteger & 返回一值为(this * val)的大数 \\
+\hline
+ BigInteger divide(val) & BigInteger & 返回一值为(this / val)的大数 \\
+\hline
+ BigInteger remainder(val) & BigInteger & 返回一值为(this \% val)的大数 \\
+\hline
+ BigInteger[] divideAndRemainder(val) & BigInteger & a[0] = this / val \\
+ & & a[1] = this \% val \\
+\hline
+ BigInteger mod(val) & BigInteger & 返回一值为(this mod val)的大数 \\
+\hline
+ BigInteger gcd(val) & BigInteger & 返回一值为gcd(this, val)的大数 \\
+\hline
+ BigInteger pow(val) & BigInteger & 返回一值为(this \^ val)的大数 \\
+\hline
+ BigInteger max(val) & BigInteger & 返回this, val的最大值 \\
+\hline
+ BigInteger min(val) & BigInteger & 返回this, val的最小值 \\
+\hline
+ BigInteger and(val) & BigInteger & 返回一值为(this and val)的大数 \\
+\hline
+ BigInteger andNot(val) & BigInteger & 返回一值为(this and ~val)的大数 \\
+\hline
+ BigInteger not(val) & BigInteger & 返回一值为(this not val)的大数 \\
+\hline
+ BigInteger or(val) & BigInteger & 返回一值为(this or val)的大数 \\
+\hline
+ BigInteger xor(val) & BigInteger & 返回一值为(this xor val)的大数 \\
+\hline
+ BigInteger shiftLeft(n) & int & 返回一值为(this << n)的大数 \\
+\hline
+ BigInteger shiftRight(n) & int & 返回一值为(this >> n)的大数 \\
+\hline
+\end{longtable}
+
+
+%---------------------------------------
+    \subsection{Java BigDecimal}\small
+%---------------------------------------
+BigDecimal 的基本用法与 BigInteger 大同小异，所以关于其基本方法不再赘述.
+在此给出两个常用的方法：
+\begin{longtable}{|p{6.2cm}|p{2.7cm}|p{6.2cm}|}
+\hline
+方法 & 接收参数 & 作用 \\
+\hline
+ BigInteger stripTrailingZeros() & void & 去除后导零 \\
+\hline
+ String toPlainString() & void & 返回非科学计数法环境下的数值 \\
+\hline
+\end{longtable}
+
+
+%---------------------------------------
+\section{分数类}\small
+%---------------------------------------
+完成分数的加减乘除运算.成员变量为分子(num)与分母(den)，
+只能通过分子分母来进行构造，
+并且重载了+, -, *, /, < ,==运算符.
+\lstinputlisting[language={C++}]{./src/ch99/03.cpp}
+
+
+%---------------------------------------
+\section{进制转换}\small
+%---------------------------------------
+把一个x进制的数转换成y进制.
+
+具体做法是先把x进制转换为10进制，然后在不断地取模倒序转换成y进制.
+
+若高进制的字母表示有区别，请注意同时修改两处字母.
+\begin{longtable}{|c|l|l|}
+复杂度 & $O(L)$ &  \\
+输入 & x & 原数据进制数，$2 \leq x \leq 62$ \\
+ & y & 新数据进制数， $2 \leq x \leq 62$ \\
+ & s & 原数据的字符串形式 \\
+输出 & string & 新数据的字符串形式 \\ 
+\end{longtable}
+\lstinputlisting[language={C++}]{./src/ch99/04.cpp}
+
+
+%---------------------------------------
+\section{格雷码}\small
+%---------------------------------------
+给一个二进制的位数n，求出一个0到$2^n-1$的排列，使得相邻两项（包括首尾相邻）
+的二进制表达中只有恰好以为不同.
+
+由数学知识可知，一种简单的格雷码编码方式有规律如下：$g[i] = i xor (i >> 1)$
+
+\begin{longtable}{|c|l|l|}
+复杂度 & $O(2^{n})$ &  \\
+输入  & n & 二进制的位数 \\
+输出 & vector<int> & n位的格雷码序列 \\ 
+\end{longtable}
+\lstinputlisting[language={C++}]{./src/ch99/05.cpp}

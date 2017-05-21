@@ -1,0 +1,1 @@
+int64 gcd(int64 a, int64 b) { return b == 0? a: gcd(b, a % b); }
