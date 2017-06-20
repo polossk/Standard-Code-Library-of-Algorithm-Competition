@@ -1,12 +1,29 @@
-# LaTeX Template For NPU thesis
-![Platfrom](https://img.shields.io/badge/Platfrom-TeXLive2016-3D6117.svg)
+# Standard Code Library of Algorithm Competition
+![Platfrom](https://img.shields.io/badge/Platfrom-TeXLive2017-3D6117.svg)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 ![Status](https://img.shields.io/badge/status-complete-brightgreen.svg)
 ![Version](https://img.shields.io/badge/version-v1.0.8-674EA7.svg)
 
-
 ## Note
 这是一份简单的面向初心者的简单模板.
+
+## Build
+> `make`
+
+## Contributors
+
+* [polossk](https://github.com/polossk): Primary Maintainer
+* [cfrpg](https://github.com/cfrpg): Contributor, Debugging
+* [pr0grammer](https://github.com/hard-working): Contributor
+
+## TODOs
+
+* Computational Geometry
+* Graph Theory
+* Data Structure
+* String Algorithm
+* Typical Examples in Dynamic Programing
+* Other Specical TRICKS in Algorithm Competition
 
 ## Copyright
 Use this code whatever you want, under the circumstances of acknowleged the

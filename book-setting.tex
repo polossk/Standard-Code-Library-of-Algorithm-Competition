@@ -68,7 +68,8 @@
 
 %---------------------------------设置中文字体---------------------------------%
 \usepackage{fontspec}
-\usepackage[SlantFont,BoldFont,CJKchecksingle,CJKnumber]{xeCJK}
+\usepackage[SlantFont,BoldFont,CJKchecksingle]{xeCJK}
+\usepackage{CJKnumb}
 % 使用 Adobe 字体
 \newcommand\adobeSog{Adobe Song Std}
 \newcommand\adobeHei{Adobe Heiti Std}
@@ -154,14 +155,10 @@
 \renewcommand{\contentsname}{目~录}
 
 
-\titleformat{\chapter}[hang]{\normalfont\sSanhao\filcenter\fHei\bf}%
-    {\sSanhao{\chaptertitlename}}{20pt}{\sSanhao}
-\titleformat{\section}[hang]{\fHei \bf \sSihao}%
-    {\sSihao \thesection}{0.5em}{}{}
-\titleformat{\subsection}[hang]{\fHei \bf \sHalfXiaosi}%
-    {\sHalfXiaosi \thesubsection}{0.5em}{}{}
-\titleformat{\subsubsection}[hang]{\fHei \bf}%
-    {\thesubsubsection }{0.5em}{}{}
+\titleformat{\chapter}[hang]{\normalfont\sErhao\filcenter\fHei\bf}{\sErhao{\chaptertitlename}}{20pt}{\sErhao}
+\titleformat{\section}[hang]{\fHei \bf \sSanhao}{\sSanhao \thesection}{0.5em}{}{}
+\titleformat{\subsection}[hang]{\fHei \bf \sSihao}{\sSihao \thesubsection}{0.5em}{}{}
+\titleformat{\subsubsection}[hang]{\fHei \bf}{\thesubsubsection }{0.5em}{}{}
 
 
 % 缩小正文中各级标题之间的缩进

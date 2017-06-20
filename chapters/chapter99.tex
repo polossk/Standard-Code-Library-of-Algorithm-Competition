@@ -29,113 +29,119 @@
 用运算符调用.
 
 数据定义与输入输出
-\begin{longtable}{|p{6.2cm}|p{2.7cm}|p{6.2cm}|}
-\hline
-方法 & 接收参数 & 作用 \\
-\hline
- BigInteger n = new BigInteger(val) & String, int, void & 新建一个值为val的大数 \\
-\hline
- BigInteger n = new BigInteger(val, radix) & String, int & 新建一个在radix进制下的值为val的大数 \\
-\hline
- Scanner cin = Scanner(System.in); & & 读入一个大数 \\
- n = cin.nextBigInteger(); & & \\
-\hline
- System.out.print(n); & & 输出大数n \\
-\hline
- System.out.println(n); & & 输出大数n并且换行 \\
-\hline
- System.out.printf("\%d$\backslash$n", n); & & 类似C++格式化输出大数n \\
-\hline
-\end{longtable}
+{\tt
+    \begin{longtable}{|p{9.3cm}|p{6cm}|}
+    \hline
+    方法 & 作用 \\
+    \hline
+    BigInteger n = new BigInteger(val) & \\
+    \hline
+    BigInteger n = new BigInteger(val, radix) & radix表示进制 \\
+    \hline
+    Scanner cin = Scanner(System.in); & 读入一个大数 \\
+    n = cin.nextBigInteger(); & \\
+    \hline
+    System.out.print(n); & 输出大数n \\
+    \hline
+    System.out.println(n); & 输出大数n并且换行 \\
+    \hline
+    System.out.printf("\%d\textbackslash n", n); & 类似C++格式化输出大数n \\
+    \hline
+    \end{longtable}
+}
 
-基本常量与方法 
-\begin{longtable}{|p{6.2cm}|p{2.7cm}|p{6.2cm}|}
-\hline
-方法 & 接收参数 & 作用 \\
-\hline
- BigInteger.ONE & & 常量，值为1 \\
-\hline
- BigInteger.TEN & & 常量，值为10 \\
-\hline
- BigInteger.ZERO & & 常量，值为0 \\
-\hline
- String toString() & void & 返回10进制下的字符串表示形式 \\
-\hline
- String toString(radix) & int & 返回基于radix进制下的字符串表示形式 \\
-\hline
- BigInteger valueOf(val) & long, int & 将val的值赋给this \\
-\hline
- int compareTo(val) & BigInteger & 根据小于、等于或大于val返回-1， 0， 1 \\
-\hline
- boolean equals(x) & Object & 判断是否与指定的Object相等 \\
-\hline
-\end{longtable}
+基本常量与方法
+{\tt
+    \begin{longtable}{|p{9.3cm}|p{6cm}|}
+    \hline
+    方法 & 作用 \\
+    \hline
+    BigInteger.ONE & 常量，值为1 \\
+    \hline
+    BigInteger.TEN & 常量，值为10 \\
+    \hline
+    BigInteger.ZERO & 常量，值为0 \\
+    \hline
+    String toString() & 返回10进制下的字符串 \\
+    \hline
+    String toString(int radix) & 返回基于radix进制下的字符串 \\
+    \hline
+    BigInteger valueOf(int val) & 将val的值赋给this \\
+    \hline
+    int compareTo(BigInteger val) & 判断大小并返回-1， 0， 1 \\
+    \hline
+    boolean equals(Object x) & 判断是否与指定的Object相等 \\
+    \hline
+    \end{longtable}
+}
 
 运算方法
-\begin{longtable}{|p{6.2cm}|p{2.7cm}|p{6.2cm}|}
-\hline
- 方法 & 接收参数 & 作用 \\
-\hline
- BigInteger abs() & void & 返回其绝对值 \\
-\hline
- BigInteger negate() & void & 返回其相反数 \\
-\hline
- int signum() & void & 返回其符号函数 \\
-\hline
- BigInteger add(val) & BigInteger & 返回一值为(this + val)的大数 \\
-\hline
- BigInteger subtract(val) & BigInteger & 返回一值为(this - val)的大数 \\
-\hline
- BigInteger muliply(val) & BigInteger & 返回一值为(this * val)的大数 \\
-\hline
- BigInteger divide(val) & BigInteger & 返回一值为(this / val)的大数 \\
-\hline
- BigInteger remainder(val) & BigInteger & 返回一值为(this \% val)的大数 \\
-\hline
- BigInteger[] divideAndRemainder(val) & BigInteger & a[0] = this / val \\
- & & a[1] = this \% val \\
-\hline
- BigInteger mod(val) & BigInteger & 返回一值为(this mod val)的大数 \\
-\hline
- BigInteger gcd(val) & BigInteger & 返回一值为gcd(this, val)的大数 \\
-\hline
- BigInteger pow(val) & BigInteger & 返回一值为(this \^ val)的大数 \\
-\hline
- BigInteger max(val) & BigInteger & 返回this, val的最大值 \\
-\hline
- BigInteger min(val) & BigInteger & 返回this, val的最小值 \\
-\hline
- BigInteger and(val) & BigInteger & 返回一值为(this and val)的大数 \\
-\hline
- BigInteger andNot(val) & BigInteger & 返回一值为(this and ~val)的大数 \\
-\hline
- BigInteger not(val) & BigInteger & 返回一值为(this not val)的大数 \\
-\hline
- BigInteger or(val) & BigInteger & 返回一值为(this or val)的大数 \\
-\hline
- BigInteger xor(val) & BigInteger & 返回一值为(this xor val)的大数 \\
-\hline
- BigInteger shiftLeft(n) & int & 返回一值为(this << n)的大数 \\
-\hline
- BigInteger shiftRight(n) & int & 返回一值为(this >> n)的大数 \\
-\hline
-\end{longtable}
-
+{\tt
+    \begin{longtable}{|p{9.3cm}|p{6cm}|}
+    \hline
+    方法 & 作用 \\
+    \hline
+    BigInteger abs() & 返回其绝对值 \\
+    \hline
+    BigInteger negate() & 返回其相反数 \\
+    \hline
+    int signum() & 返回其符号函数 \\
+    \hline
+    BigInteger add(BigInteger val) & 返回 this + val \\
+    \hline
+    BigInteger subtract(BigInteger val) & 返回 this - val \\
+    \hline
+    BigInteger muliply(BigInteger val) & 返回 this * val \\
+    \hline
+    BigInteger divide(BigInteger val) & 返回 this / val \\
+    \hline
+    BigInteger remainder(BigInteger val) & 返回 this \% val \\
+    \hline
+    BigInteger[] divideAndRemainder(val) & a[] = this / val, this \% val \\
+    \hline
+    BigInteger mod(BigInteger val) & 返回 this mod val \\
+    \hline
+    BigInteger gcd(BigInteger val) & 返回 gcd(this, val) \\
+    \hline
+    BigInteger pow(BigInteger val) & 返回 this \^{} val \\
+    \hline
+    BigInteger max(BigInteger val) & 返回两者的最大值 \\
+    \hline
+    BigInteger min(BigInteger val) & 返回两者的最小值 \\
+    \hline
+    BigInteger and(BigInteger val) & 返回 this and val \\
+    \hline
+    BigInteger andNot(BigInteger val) & 返回 this and \~{}val \\
+    \hline
+    BigInteger not(BigInteger val) & 返回 this not val \\
+    \hline
+    BigInteger or(BigInteger val) & 返回 this or val \\
+    \hline
+    BigInteger xor(BigInteger val) & 返回 this xor val \\
+    \hline
+    BigInteger shiftLeft(int n) & 返回 this << n \\
+    \hline
+    BigInteger shiftRight(int n) & 返回 this >> n \\
+    \hline
+    \end{longtable}
+}
 
 %---------------------------------------
     \subsection{Java BigDecimal}\small
 %---------------------------------------
 BigDecimal 的基本用法与 BigInteger 大同小异，所以关于其基本方法不再赘述.
 在此给出两个常用的方法：
-\begin{longtable}{|p{6.2cm}|p{2.7cm}|p{6.2cm}|}
-\hline
-方法 & 接收参数 & 作用 \\
-\hline
- BigInteger stripTrailingZeros() & void & 去除后导零 \\
-\hline
- String toPlainString() & void & 返回非科学计数法环境下的数值 \\
-\hline
-\end{longtable}
+{\tt
+    \begin{longtable}{|p{9.3cm}|p{6cm}|}
+    \hline
+    方法 & 作用 \\
+    \hline
+    BigDecimal stripTrailingZeros() & 去除后导零 \\
+    \hline
+    String toPlainString() & 返回非科学计数法环境下的数值 \\
+    \hline
+    \end{longtable}
+}
 
 
 %---------------------------------------
@@ -160,7 +166,7 @@ BigDecimal 的基本用法与 BigInteger 大同小异，所以关于其基本方
 输入 & x & 原数据进制数，$2 \leq x \leq 62$ \\
  & y & 新数据进制数， $2 \leq x \leq 62$ \\
  & s & 原数据的字符串形式 \\
-输出 & string & 新数据的字符串形式 \\ 
+输出 & string & 新数据的字符串形式 \\
 \end{longtable}
 \lstinputlisting[language={C++}]{./src/ch99/04.cpp}
 
@@ -169,13 +175,13 @@ BigDecimal 的基本用法与 BigInteger 大同小异，所以关于其基本方
 \section{格雷码}\small
 %---------------------------------------
 给一个二进制的位数n，求出一个0到$2^n-1$的排列，使得相邻两项（包括首尾相邻）
-的二进制表达中只有恰好以为不同.
+的二进制表达中只有恰好一位不同.
 
-由数学知识可知，一种简单的格雷码编码方式有规律如下：$g[i] = i xor (i >> 1)$
+由数学知识可知，一种简单的格雷码编码方式有规律如下：$g[i] = i \text{xor} (i >> 1)$
 
 \begin{longtable}{|c|l|l|}
-复杂度 & $O(2^{n})$ &  \\
-输入  & n & 二进制的位数 \\
-输出 & vector<int> & n位的格雷码序列 \\ 
+复杂度 & $O(2^{n})$ & \\
+输入 & n & 二进制的位数 \\
+输出 & vector<int> & n位的格雷码序列 \\
 \end{longtable}
 \lstinputlisting[language={C++}]{./src/ch99/05.cpp}
