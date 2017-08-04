@@ -18,6 +18,6 @@ int64 primitive_root(int64 p)
         while (tmp % i == 0) tmp /= i;
     }
     if (tmp != 1) a.push_back(tmp);
-    int64 g = 1;
-    while (1) { if (g_test(g, p)) return g; g++; }
+    for (int64 g = 0; !g_test(g, p); g++);
+    return g;
 }

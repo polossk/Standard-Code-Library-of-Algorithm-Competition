@@ -9,7 +9,7 @@ void getPhi_Prime()
     phi[1] = 1; tot = 0;
     for (int i = 2; i < MaxN; i++)
     {
-        if (isPrime[i]) { prime[tot++]; phi[i] = i - 1; }
+        if (isPrime[i]) { prime[tot++] = i; phi[i] = i - 1; }
         for (int j = 0; j < tot; j++)
         {
             if (i * prime[j] >= MaxN) break;
