@@ -132,7 +132,7 @@ void solve()
 
 int main()
 {
-    srand(time(0));
+    srand(19260817); // only in POJ, use srand(time(0)) otherwise
     t = nextInt(); while (t--) solve();
     return 0;
 }
