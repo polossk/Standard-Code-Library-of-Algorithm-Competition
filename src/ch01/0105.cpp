@@ -80,16 +80,13 @@ Matrix pow_mod(const Matrix& a, int64 k, const int mod)
     p = a; ans = a;
     ans.Unit(a.n);
     if (k == 0) return ans;
-    else if (k == 1) return a;
-    else
+    if (k == 1) return a;
+    while (k)
     {
-        while (k)
-        {
-            if (k & 1) { ans=mul_mod(ans, p, mod); k--; }
-            else { k /= 2; p = mul_mod(p, p, mod); }
-        }
-        return ans;
+        if (k & 1) { ans=mul_mod(ans, p, mod); k--; }
+        else { k /= 2; p = mul_mod(p, p, mod); }
     }
+    return ans;
 }
 
 int64 n;
