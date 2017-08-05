@@ -25,8 +25,8 @@ struct Matrix
     {
         Matrix tmp; tmp.clear(); tmp.n = n; tmp.m = b.m;
         for (int i = 0; i < n; i++)
-            for (int j = 0; j < b.m; j++)
-                for (int k = 0; k < m; k++)
+            for (int k = 0; k < m; k++)
+                for (int j = 0; j < b.m; j++)
                     tmp.a[i][j] += a[i][k] * b.a[k][j];
         return tmp;
     }
