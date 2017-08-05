@@ -54,25 +54,22 @@ Matrix add_mod(const Matrix& a, const Matrix& b, const int64 mod)
 Matrix mul(const Matrix& a, const Matrix& b)
 {
     Matrix ans(a.n, b.m);
-    for (int i = 0; i < a.n; i++) for (int k = 0; k < a.m; k++)(int j = 0; j < b.m; j++)
-    {
-        int64 tmp = 0;
-        for (int j = 0; j < b.m; j++)
-            tmp += a.mat[i][k] * b.mat[k][j];
-        ans.mat[i][j] = tmp;
-    }
+    for (int i = 0; i < a.n; i++)
+        for (int k = 0; k < a.m; k++)
+            for (int j = 0; j < b.m; j++)
+                ans.mat[i][j] += a.mat[i][k] * b.mat[k][j];
     return ans;
 }
 
 Matrix mul_mod(const Matrix& a, const Matrix& b, const int mod)
 {
     Matrix ans(a.n, b.m);
-    for (int i = 0; i < a.n; i++) for (int k = 0; k < a.m; k++)
+    for (int i = 0; i < a.n; i++)
+        for (int k = 0; k < a.m; k++)
+            for (int j = 0; j < b.m; j++)
     {
-        int64 tmp = 0;
-        for (int j = 0; j < b.m; j++)
-            tmp += (a.mat[i][k] * b.mat[k][j]) % mod;
-        ans.mat[i][j] = tmp % mod;
+        int64 tmp = (a.mat[i][k] * b.mat[k][j]) % mod;
+        ans.mat[i][j] = (ans.mat[i][j] + tmp) % mod;
     }
     return ans;
 }
