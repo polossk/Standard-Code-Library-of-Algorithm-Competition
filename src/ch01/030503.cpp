@@ -1,8 +1,8 @@
-int summ[MaxN];
+int summ[MAXN];
 void getPrefixSum()
 {
     summ[0] = 0;
-    for (int i = 1; i < MaxN; i++)
+    for (int i = 1; i < MAXN; i++)
         summ[i] = summ[i - 1] + mu[i];
 }
 

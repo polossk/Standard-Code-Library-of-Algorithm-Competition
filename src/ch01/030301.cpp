@@ -1,5 +1,5 @@
-const int MaxN = 1005;
-void factor(int n, int a[MaxN], int b[MaxN], int& tot)
+const int MAXN = 1005;
+void factor(int n, int a[MAXN], int b[MAXN], int& tot)
 {
     int now = n; tot = 0;
     for (int i = 2; i <= n / i; i++) if (now % i == 0)

@@ -1,9 +1,9 @@
-const int MaxN = 1010;
+const int MAXN = 1010;
 const int MaxM = 1010;
 struct Matrix
 {
     int n, m;
-    int a[MaxN][MaxM];
+    int a[MAXN][MaxM];
     void clear() { n = m = 0; memset(a, 0, sizeof(a)); }
     Matrix operator+(const Matrix& b) const
     {

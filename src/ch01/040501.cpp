@@ -5,18 +5,7 @@
 *    @name      :   HDU 1402                                                 *
 *****************************************************************************/
 
-#include <map>
-#include <list>
-#include <queue>
-#include <stack>
-#include <cmath>
-#include <vector>
-#include <string>
-#include <cstdio>
-#include <cstring>
-#include <cstdlib>
-#include <iostream>
-#include <algorithm>
+#include <bits/stdc++.h>
 using namespace std;
 typedef long long int64;
 template<class T>inline bool updateMin(T& a, T b){ return a > b ? a = b, 1: 0; }
@@ -83,10 +72,10 @@ void fft(Complex y[], int len, int on)
         y[i].x /= len;
 }
 
-const int MaxN = 200010;
-Complex x1[MaxN], x2[MaxN];
-char str1[MaxN / 2], str2[MaxN / 2];
-int sum[MaxN];
+const int MAXN = 200010;
+Complex x1[MAXN], x2[MAXN];
+char str1[MAXN / 2], str2[MAXN / 2];
+int sum[MAXN];
 
 void solve()
 {

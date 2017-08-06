@@ -1,12 +1,9 @@
-#include <iostream>
-#include <cstdio>
-#include <cstring>
-#include <cstdlib>
+#include <bits/stdc++.h>
 using namespace std;
 
-#define MAXN 9999
-#define MAXSIZE 1010
-#define DLEN 4
+const int MAXN =  9999;
+const int MAXSIZE = 1010;
+const int DLEN = 4;
 class BigInt
 {
 private:
@@ -94,8 +91,7 @@ istream& operator>>(istream &in, BigInt &b)
         int t = 1;
         for (int j = 0; j < 4 && i >= 0; j++, i--, t *= 10)
             sum += (ch[i] - '0') * t;
-        b.a[count] = sum;
-        count++;
+        b.a[count++] = sum;
     }
     b.len = count++;
     return in;
@@ -194,11 +190,10 @@ int BigInt::operator%(const int &b) const   //大数对一个 int类型的变量
 BigInt BigInt::operator^(const int &n) const  //大数的n次方运算
 {
     BigInt t, ret(1);
-    int i;
     if (n < 0) exit(-1);
     if (n == 0) return 1;
     if (n == 1) return *this;
-    int m = n;
+    int i, m = n;
     while (m > 1)
     {
         t = *this;
@@ -242,13 +237,11 @@ bool BigInt::operator<(const BigInt &T) const // 大数和另一个大数的大�
 }
 bool BigInt::operator>(const int &t) const // 大数和一个int类型的变量的大小比较
 {
-    BigInt b(t);
-    return *this > b;
+    BigInt b(t); return *this > b;
 }
 bool BigInt::operator<(const int &t) const // 大数和一个int类型的变量的大小比较
 {
-    BigInt b(t);
-    return *this < b;
+    BigInt b(t); return *this < b;
 }
 void BigInt::print() // 输出大数
 {

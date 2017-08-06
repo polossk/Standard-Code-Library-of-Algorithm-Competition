@@ -20,7 +20,7 @@ inline char   nextChr() { scanf(" "); return getchar(); }
 inline double nextDbf() { double x; scanf("%lf", &x); return x; }
 inline int64  next64d() { int64 d; scanf("%I64d",&d); return d; }
 
-const int64 MaxN = 105;
+const int64 MAXN = 105;
 int64 gcd(int64 a, int64 b)
 {
     if (a == 0) return 1;
@@ -104,7 +104,7 @@ int64 Pollard_rho(int64 x, int64 c)
     }
 }
 
-int64 tot, result[MaxN];
+int64 tot, result[MAXN];
 void findfac(int64 n)
 {
     if (n == 1) return;

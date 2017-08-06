@@ -24,7 +24,7 @@ inline int64  next64d() { int64 d; scanf("%I64d",&d); return d; }
 
 typedef map<int64, int64>::iterator itr;
 
-const int64 MaxN = 1005;
+const int64 MAXN = 1005;
 const int64 INF  = ~0ull >> 1;
 int64 gcd(int64 a, int64 b)
 {
@@ -121,7 +121,7 @@ void findfac(int64 n)
     findfac(p); findfac(n / p);
 }
 
-int64 cnt, data[MaxN];
+int64 cnt, data[MAXN];
 inline int64 powi(int64 n, int64 k)
 {
     int64 ans = 1LL;
