@@ -4,32 +4,28 @@
 *    @name      :   HDU 4686                                                 *
 *****************************************************************************/
 
-#include <iostream>
-#include <algorithm>
-#include <cstdio>
-#include <cstring>
+#include <bits/stdc++.h>
 using namespace std;
 typedef long long int64;
 
-const int MaxN = 5;
-const int MaxM = 5;
-const int Mod = 1000000007;
+const int MAXN = 5;
+const int MAXM = 5;
+const int MOD = 1000000007;
 
 struct Matrix
 {
     int n, m;
-    int64 mat[MaxN][MaxM];
+    int64 mat[MAXN][MAXM];
     Matrix(): n(-1), m(-1){}
-    Matrix(int _n, int _m): n(_n), m(_m)
+    Matrix(int _n, int _m, bool lazy = false): n(_n), m(_m)
     {
-        memset(mat, 0, sizeof(mat));
+        if (!lazy) memset(mat, 0, sizeof mat);
     }
     void Unit(int _s)
     {
         n = _s; m = _s;
-        for (int i = 0; i < n; i++)
-            for (int j = 0; j < n; j++)
-                mat[i][j] = (i == j)? 1: 0;
+        memset(mat, 0, sizeof mat);
+        while (_s--) mat[_s][_s] = 1;
     }
     void print()
     {
@@ -43,7 +39,7 @@ struct Matrix
     }
 };
 
-Matrix add_mod(const Matrix& a, const Matrix& b, const int64 mod)
+Matrix add_mod(const Matrix& a, const Matrix& b, const int mod)
 {
     Matrix ans(a.n, a.m);
     for (int i = 0; i < a.n; i++) for (int j = 0; j < a.m; j++)
@@ -65,7 +61,7 @@ Matrix mul_mod(const Matrix& a, const Matrix& b, const int mod)
 {
     Matrix ans(a.n, b.m);
     for (int i = 0; i < a.n; i++)
-        for (int k = 0; k < a.m; k++)
+        for (int k = 0; k < a.m; k++) if (a.mat[i][k])
             for (int j = 0; j < b.m; j++)
     {
         int64 tmp = (a.mat[i][k] * b.mat[k][j]) % mod;
@@ -76,14 +72,12 @@ Matrix mul_mod(const Matrix& a, const Matrix& b, const int mod)
 
 Matrix pow_mod(const Matrix& a, int64 k, const int mod)
 {
-    Matrix p(a.n,a.m), ans(a.n,a.m);
-    p = a; ans = a;
-    ans.Unit(a.n);
-    if (k == 0) return ans;
-    if (k == 1) return a;
+    Matrix ans(a.n, a.m, true); ans.Unit(a.n);
+    if (k <= 1) return k == 0 ? ans : a;
+    Matrix p(a);
     while (k)
     {
-        if (k & 1) { ans=mul_mod(ans, p, mod); k--; }
+        if (k & 1) { ans = mul_mod(ans, p, mod); k--; }
         else { k /= 2; p = mul_mod(p, p, mod); }
     }
     return ans;
@@ -101,21 +95,20 @@ void solve()
     beg.mat[0][0] = 1;
     beg.mat[1][0] = a0;
     beg.mat[2][0] = b0;
-    beg.mat[3][0] = a0 * b0 % Mod;
+    beg.mat[3][0] = a0 * b0 % MOD;
     beg.mat[4][0] = 0;
 
     Matrix cef(5, 5);
-    memset(cef.mat, 0, sizeof(cef.mat));
     cef.mat[0][0] = 1;
-    cef.mat[1][0] = ay % Mod; cef.mat[1][1] = ax % Mod;
-    cef.mat[2][0] = by % Mod; cef.mat[2][2] = bx % Mod;
-    cef.mat[3][0] = ay * by % Mod; cef.mat[3][1] = ax * by % Mod;
-    cef.mat[3][2] = ay * bx % Mod; cef.mat[3][3] = ax * bx % Mod;
+    cef.mat[1][0] = ay % MOD; cef.mat[1][1] = ax % MOD;
+    cef.mat[2][0] = by % MOD; cef.mat[2][2] = bx % MOD;
+    cef.mat[3][0] = ay * by % MOD; cef.mat[3][1] = ax * by % MOD;
+    cef.mat[3][2] = ay * bx % MOD; cef.mat[3][3] = ax * bx % MOD;
     cef.mat[4][3] = 1; cef.mat[4][4] = 1;
 
-    Matrix tmp(5, 5);
-    tmp = pow_mod(cef, n, Mod);
-    ans = mul_mod(tmp, beg, Mod);
+    Matrix tmp(5, 5, true);
+    tmp = pow_mod(cef, n, MOD);
+    ans = mul_mod(tmp, beg, MOD);
 
     cout << ans.mat[4][0] << endl;
     return;
