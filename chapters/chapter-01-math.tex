@@ -377,24 +377,40 @@ $
 %---------------------------------------
         \subsubsection{离散对数}\small
 %---------------------------------------
-用于求方程$x^{y} \equiv n(mod\ m)$的最小整数解$y$, 其中m为素数.若无
+用于求方程$A^{y} \equiv B(mod\ m)$的最小整数解$y$, 其中m为素数.若无
 解则返回-1.
 
 使用giant-step baby-step算法.令$s = \lfloor \sqrt{m} \rfloor$, 则有
 $y = b \times s + r(0 \leq r < s)$, 
-即有$x^{y} = x^{b \times s} \times x^{r}$.
-将所有的$x^{r}$放入有序表中, 从小到大枚举b, 
-得到：$x^{b \times s} \times x^{r} = n$.
+即有$A^{y} = A^{b \times s} \times A^{r}$.
+将所有的$A^{r}$放入有序表中, 从小到大枚举b, 
+得到：$A^{b \times s} \times A^{r} = n$.
 
-把$x^{r}$看成未知数解模线性方程.若解$x^{r}$能够在有序表中二分查找得
+把$A^{r}$看成未知数解模线性方程.若解$A^{r}$能够在有序表中二分查找得
 到, 则停止枚举, 此时, $y = b \times s + r$.
 \begin{longtable}{|c|l|l|}
 复杂度 & $O(\sqrt{m})$ &  \\
-输入 & x, n & 方程系数 \\
+输入 & A, B & 方程系数 \\
  & m & 模数, 且为素数 \\
 输出 &  & 离散对数$y$ \\
 \end{longtable}
 \lstinputlisting[language={C++}]{./src/ch01/020505.cpp}
+
+
+%---------------------------------------
+        \subsubsection{拓展离散对数}\small
+%---------------------------------------
+如果方程$A^{y} \equiv B(mod\ m)$满足 $gcd(A, m) > 1$, 则此时应当使用拓展大步小步法求解, 具体做法如下.
+
+令 $d = \text{gcd}(A, m)$, 将原始方程修改为 $A^{y - 1} \frac{A}{d} \equiv \frac{B}{d}(mod\ \frac{m}{d})$. 如果此时满足 A 与 $\frac{m}{d}$ 互素, 则调用普通的大步小步法求解; 否则继续求此时的 $d_2 = \text{gcd}(A, m_2)$. 不妨设最后约简后的方程为 $M_k A^{y-k} \equiv B_k(mod\ m_k)$, 其中 $M_k = \prod^k_{i=1}d_i$, $B_k = \frac{B}{M_k}$, $m_k = \frac{m}{M_k}$, 进一步化简为$A^{y-k} \equiv B_k M_k^{-1}(mod\ m_k)$, 解出 $y-k$ 即可.
+
+\begin{longtable}{|c|l|l|}
+复杂度 & $O(\sqrt{m})$ &  \\
+输入 & A, B & 方程系数 \\
+ & m & 模数\\
+输出 &  & 离散对数$y$ \\
+\end{longtable}
+\lstinputlisting[language={C++}]{./src/ch01/020506.cpp}
 
 
 %---------------------------------------
@@ -424,7 +440,7 @@ $y \times N \equiv t (mod\ (p-1))$
  & p & 模数, 且为素数 \\
 输出 & vector<int> & 全体整数解$\{x\}$ \\
 \end{longtable}
-\lstinputlisting[language={C++}]{./src/ch01/020506.cpp}
+\lstinputlisting[language={C++}]{./src/ch01/020507.cpp}
 
 
 %---------------------------------------
