@@ -7,6 +7,7 @@ bool check(int n)
     if (isPrime[n]) return true;
     for (int i = 3; i * i <= n; i += 2) if (n % i == 0)
         while (n % i == 0) n /= i; return n == 1;
+    return 0;
 }
 
 vector<int64> a;
