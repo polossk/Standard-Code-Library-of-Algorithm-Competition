@@ -73,22 +73,17 @@ Matrix pow_mod(const Matrix& a, int64 k, const int mod)
     return ans;
 }
 
-int64 n;
-int64 a0, ax, ay;
-int64 b0, bx, by;
+int64 n, a0, ax, ay, b0, bx, by;
 
 void solve()
 {
-    Matrix ans(5, 1);
-
-    Matrix beg(5, 1);
+    Matrix ans(5, 1), beg(5, 1), cef(5, 5);
     beg.mat[0][0] = 1;
     beg.mat[1][0] = a0;
     beg.mat[2][0] = b0;
     beg.mat[3][0] = a0 * b0 % MOD;
     beg.mat[4][0] = 0;
 
-    Matrix cef(5, 5);
     cef.mat[0][0] = 1;
     cef.mat[1][0] = ay % MOD; cef.mat[1][1] = ax % MOD;
     cef.mat[2][0] = by % MOD; cef.mat[2][2] = bx % MOD;
@@ -99,18 +94,12 @@ void solve()
     Matrix tmp(5, 5, true);
     tmp = pow_mod(cef, n, MOD);
     ans = mul_mod(tmp, beg, MOD);
-
     cout << ans.mat[4][0] << endl;
     return;
 }
 
 int main()
 {
-    while (cin >> n)
-    {
-        cin >> a0 >> ax >> ay;
-        cin >> b0 >> bx >> by;
-        solve();
-    }
+    while (cin >> n >> a0 >> ax >> ay >> b0 >> bx >> by) solve();
     return 0;
 }
