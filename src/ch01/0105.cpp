@@ -1,13 +1,3 @@
-/*****************************************************************************
-*                      ----Stay Hungry Stay Foolish----                      *
-*    @author    :   Shen                                                     *
-*    @name      :   HDU 4686                                                 *
-*****************************************************************************/
-
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long int64;
-
 const int MAXN = 5;
 const int MAXM = 5;
 const int MOD = 1000000007;
