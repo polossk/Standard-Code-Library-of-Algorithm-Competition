@@ -9,7 +9,7 @@ void getMu_Prime()
     mu[1] = 1; tot = 0;
     for (int i = 2; i < MAXN; i++)
     {
-        if (isPrime[i]) { prime[tot++]; phi[i] = -1; }
+        if (isPrime[i]) { prime[tot++] = i; mu[i] = -1; }
         for (int j = 0; j < tot; j++)
         {
             if (i * prime[j] >= MAXN) break;
