@@ -1,11 +1,3 @@
-inline bool test(double xl, double xr)
-{
-    // true : l = mid
-    // false: r = midmid
-    /**Specific Calculation**/
-    return calcf(xl) < calcf(xr);
-}
-
 double Tsearch(double l, double r)
 {
     ///@return the x, not the f(x)
