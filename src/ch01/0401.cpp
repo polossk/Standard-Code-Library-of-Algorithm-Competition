@@ -1,8 +1,7 @@
 ﻿const double eps = 1e-15;
 inline bool test(double x)
 {
-    // true : l = mid
-    // false: r = mid
+    // true : l = mid, false: r = mid
     /**Specific Calculation**/
 }
 double Bsearch(double l, double r)

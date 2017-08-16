@@ -1,15 +1,10 @@
-#include <ctime>
+#include <ctime> // using srand()
 const int64 MAXN = 105;
 int64 gcd(int64 a, int64 b)
 {
     if (a == 0) return 1;
-    if (a < 0) return gcd(-a, b);
-    while (b)
-    {
-        int64 t = a; a = b; b = t % b;
-    }
-    return a;
-
+    if (a < 0) return __gcd(-a, b);
+    return __gcd(a, b);
 }
 
 int64 mul_mod(int64 a, int64 b, int64 m)
