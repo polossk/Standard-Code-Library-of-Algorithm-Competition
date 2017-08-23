@@ -350,11 +350,11 @@ n原根的个数总共有 $\varphi(n)$ 个, 如果需要输出所有的原根, �
  0 & \text{d整除p}
 \end{cases} \]
 
-勒让德符号可以直接用欧拉判别条件进行计算, 即$(\frac{d}{p}) \equiv a ^ {\frac{p-1}{2}}(mod\ p)$.
+勒让德符号可以直接用欧拉判别条件进行计算, 即$(\frac{d}{p}) \equiv d ^ {\frac{p-1}{2}}(mod\ p)$.
 
 \begin{longtable}{|c|l|l|}
 复杂度 & $O(\log N)$ & 其中N与p同阶  \\
-输入 & a & 所要计算的整数 \\
+输入 & d & 所要计算的整数 \\
  & p & 模数 \\
 输出 &  & $(\frac{d}{p})$ \\
 \end{longtable}
