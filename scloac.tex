@@ -1,6 +1,6 @@
 \documentclass[12pt,a4paper,openany,oneside]{book}
 %------------------------------------------------------------------------------%
-\newcommand\artversion{1.0.9}
+\newcommand\artversion{1.0.11}
 \newcommand\shorttitle{SCL of AC}
 \newcommand\strtitle{Standard Code Library of Algorithm Competition}
 \newcommand\strauthor{polossk, cfrpg, pr0grammer}
@@ -10,6 +10,7 @@
 
 %------------------------------------------------------------------------------%
 \input{book-setting}
+\usepackage{multicol}
 %------------------------------------------------------------------------------%
 \begin{document}
 %------------------------------------------------------------------------------%
@@ -27,23 +28,13 @@
     \hline
     版本号 & 时间 & 修订人 & 修订说明 \\
     \hline
-    1.0.9 & Jun 20, 2017 & polossk & 更新大数相关的说明 \\
+    1.0.10 & Aug 16, 2017 & polossk & 修复所有数学类的问题 \\
     \hline
     1.0.8 & May 18, 2017 & polossk & 重新更正格式 \\
     \hline
     1.0.7 & Jul 28, 2015 & cfrpg & 原作者的高斯消元害我debug一天！ \\
     \hline
     1.0.6 & Nov 29, 2014 & polossk & 修改快速傅里叶变换的部分错误 \\
-    \hline
-    1.0.5 & Nov 19, 2014 & polossk & 修改一些细节错误 \\
-    \hline
-    1.0.4 & Nov 2, 2014 & polossk & 修改一些细节错误 \\
-    \hline
-    1.0.3 & Oct 3, 2014 & polossk & 删除完全大数模板，从此C++只留一个大数模板 \\
-    \hline
-    1.0.2 & Sept 27, 2014 & polossk & Java大数类部分函数说明有误 \\
-    \hline
-    1.0.1 & Sept 21, 2014 & polossk & 个别错别字与代码错误修订 \\
     \hline
     1.0.0 & Sept 10, 2014 & polossk & 文档成型 \\
     \hline
@@ -53,7 +44,9 @@
 \clearpage
 \phantomsection
 \addcontentsline{toc}{chapter}{\fHei 目录}
+\begin{multicols}{2}
 \tableofcontents
+\end{multicols}
 \clearpage
 
 %------------------------------------------------------------------------------%
@@ -62,8 +55,8 @@
 % 文章正文
 %---------------------------------------
 
-\input{chapters/chapter01.tex}
-\input{chapters/chapter99.tex}
+\input{chapters/chapter-01-math.tex}
+\input{chapters/chapter-99-misc.tex}
 
 %---------------------------------------
 

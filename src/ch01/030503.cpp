@@ -1,9 +1,10 @@
-int summ[MaxN];
+int summ[MAXN];
 void getPrefixSum()
 {
-    summ[0] = 0;
-    for (int i = 1; i < MaxN; i++)
-        summ[i] = summ[i - 1] + mu[i];
+    std::partial_sum(mu, mu + MAXN, sumu);
+    // summ[0] = 0;
+    // for (int i = 1; i < MAXN; i++)
+    //     summ[i] = summ[i - 1] + mu[i];
 }
 
 // calculate the pairs of (i, j) when gcd(i, j) = 1
@@ -44,7 +45,7 @@ int64 calc(int a, int b, int c)
 int64 find(int a, int b, int d)
 {
     if (a == 0 || b == 0 || d == 0) return 0;
-    else return calc(a / d, b / d);
+    return calc(a / d, b / d);
 }
 
 // calculate the pairs of (i, j, k) when gcd(i, j, k) = d
@@ -52,13 +53,13 @@ int64 find(int a, int b, int d)
 int64 find(int a, int b, int c, int d)
 {
     if (a == 0 || b == 0 || c == 0 || d == 0) return 0;
-    else return calc(a / d, b / d, c / d);
+    return calc(a / d, b / d, c / d);
 }
 
 // calculate the points of a cuboid which has a, b, c points
 // in x, y, z directions, when looking from point(0, 0, 0)
 int64 looking(int a, int b, int c)
 {
-    a--; b--; c--;
+    // a--; b--; c--; // uncomment or not depends on input number
     return 3 + calc(a, b, c) + calc(a, b) + calc(a, c) + calc(b, c);
 }

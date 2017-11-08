@@ -1,5 +1,5 @@
 // x ^ 2 = a (mod m), solve x
-int64 modsqr(int64 a, int64 m)
+int64 modsqrt(int64 a, int64 m)
 {
     int64 b, k, i, x; a %= m;
     if (m == 2) return a % m;
@@ -21,8 +21,7 @@ int64 modsqr(int64 a, int64 m)
             x = mul_mod(t1, t2, m);
         }
         else x = pow_mod(a, (m + 1) / 4, m);
-        if (x * 2 > m) x = m - x;
-        return x;
+        return x * 2 > m ? m - x : x;
     }
     else return -1;
 }

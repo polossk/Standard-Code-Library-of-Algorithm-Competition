@@ -2,7 +2,7 @@
 ![Platfrom](https://img.shields.io/badge/Platfrom-TeXLive2017-3D6117.svg)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 ![Status](https://img.shields.io/badge/status-complete-brightgreen.svg)
-![Version](https://img.shields.io/badge/version-v1.0.10-674EA7.svg)
+[![Current Version](https://img.shields.io/badge/version-v1.0.11-674EA7.svg)](release-note.md)
 
 ## Note
 这是一份简单的面向初心者的简单模板.

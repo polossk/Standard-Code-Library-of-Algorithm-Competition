@@ -1,36 +1,10 @@
-// <!--encoding UTF-8 UTF-8编码--!>
-/*****************************************************************************
-*                      ----Stay Hungry Stay Foolish----                      *
-*    @author    :   Shen                                                     *
-*    @name      :   poj 1811                                                 *
-*****************************************************************************/
-
-#include <ctime>
-#include <cstdio>
-#include <cstring>
-#include <iostream>
-#include <algorithm>
-using namespace std;
-typedef long long int64;
-template<class T>inline bool updateMin(T& a, T b){ return a > b ? a = b, 1: 0; }
-template<class T>inline bool updateMax(T& a, T b){ return a < b ? a = b, 1: 0; }
-inline int    nextInt() { int x; scanf("%d", &x); return x; }
-inline int64  nextI64() { int64  d; cin >> d; return d; }
-inline char   nextChr() { scanf(" "); return getchar(); }
-inline double nextDbf() { double x; scanf("%lf", &x); return x; }
-inline int64  next64d() { int64 d; scanf("%I64d",&d); return d; }
-
-const int64 MaxN = 105;
+#include <ctime> // using srand()
+const int64 MAXN = 105;
 int64 gcd(int64 a, int64 b)
 {
     if (a == 0) return 1;
-    if (a < 0) return gcd(-a, b);
-    while (b)
-    {
-        int64 t = a; a = b; b = t % b;
-    }
-    return a;
-
+    if (a < 0) return __gcd(-a, b);
+    return __gcd(a, b);
 }
 
 int64 mul_mod(int64 a, int64 b, int64 m)
@@ -104,7 +78,7 @@ int64 Pollard_rho(int64 x, int64 c)
     }
 }
 
-int64 tot, result[MaxN];
+int64 tot, result[MAXN];
 void findfac(int64 n)
 {
     if (n == 1) return;
@@ -132,7 +106,7 @@ void solve()
 
 int main()
 {
-    srand(time(0));
+    srand(19260817); // only in POJ, use srand(time(0)) instead
     t = nextInt(); while (t--) solve();
     return 0;
 }

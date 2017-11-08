@@ -1,22 +1,17 @@
-// x ^ N = a (mod p), solve x
-vector<int64> residue(int64 N, int64 a, int64 p)
+// a ^ y = b (mod m), solve y
+int64 ex_discrete_log(int64 a, int64 b, int64 m)
 {
-    int64 g = primitive_root(p);
-    int64 m = discrete_log(g, a, p);
-    vector<int64> ret;
-    if (a == 0) { ret.push_back(0); return ret; }
-    if (m == -1) return ret;
-    int64 A = N, B = p - 1, C = m, x, y;
-    int64 d = gcd_ex(A, B, x, y);
-    if (C % d != 0) return ret;
-    x = x * (C / d) % B;
-    int64 delta = B / d;
-    for (int i = 0; i < d; i++)
+    if (b >= m) return -1;
+    if (b == 0) return 0;
+
+    int64 d = 1, k = 0, M = 1;
+    while ((d = __gcd(a, m)) != 1)
     {
-        x = ((x + delta) % B + B) % B;
-        ret.push_back((pow_mod(g, x, p)));
+        if (b % d) return -1;
+        b /= d; m /= d; k++;
+        M = M * (a / d) % m;
+        if (b == M) return k;
     }
-    sort(ret.begin(), ret.end());
-    ret.erase(unique(ret.begin(), ret.end()), ret.end());
-    return ret;
+    int64 ret = discrete_log(a, b * inv(M, m) % m, m);
+    return ret == -1 ? ret : ret + k;
 }

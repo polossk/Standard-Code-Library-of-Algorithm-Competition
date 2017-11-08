@@ -1,24 +1,37 @@
-string transform(int x, int y, string s)
+typedef long long int64;
+int64 gcd(int64 a, int64 b) { return a == 0? b: gcd(b, a % b); }
+struct Fraction
 {
-    int sz = s.size(), sum = 0; string res = "";
-    for (int i = 0; i < sz; i++)
-    {
-        if (s[i] == '-') continue;
-        if (s[i] >= '0' && s[i] <= '9')
-            sum = sum * x + s[i] - '0';
-        else if (s[i] >= 'A' && s[i] <= 'Z')
-            sum = sum * x + s[i] - 'A' + 10;
-        else sum = sum * x + s[i] - 'a' + 10 + 26;
-    }
-    while (sum)
-    {
-        char tmp = sum % y; sum /= y;
-        if (tmp <= 9) tmp += '0';
-        else if (tmp <= 36) tmp += 'A' - 10;
-        else tmp += 'A' - 10 - 26;    
-        res = tmp + res;
-    }
-    if (res.size() == 0) res = "0";
-    if (s[0] == '-') res = '-' + res;
-    return res;
-}
+	int64 num, den;
+	Fraction(int64 n = 0, d = 0)
+	{
+		if (d < 0) { n = -n; d = -d; }
+		assert(d != 0);
+		int64 g = gcd(abs(n), d);
+		num = n / g; den = d / g;
+	}
+	Fraction operator+(const Fraction& o) const
+	{
+		return Fraction(num * o.den + den * o.num, den * o.den);
+	}
+	Fraction operator-(const Fraction& o) const
+	{
+		return Fraction(num * o.den - den * o.num, den * o.den);
+	}
+	Fraction operator*(const Fraction& o) const
+	{
+		return Fraction(num * o.num, den * o.den);
+	}
+	Fraction operator/(const Fraction& o) const
+	{
+		return Fraction(num * o.den, den * o.num);
+	}
+	Fraction operator<(const Fraction& o) const
+	{
+		return num * o.den < den * o.num;
+	}
+	Fraction operator==(const Fraction& o) const
+	{
+		return num * o.den == den * o.num;
+	}
+};

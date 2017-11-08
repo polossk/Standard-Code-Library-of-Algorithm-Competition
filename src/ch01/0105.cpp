@@ -1,35 +1,21 @@
-/*****************************************************************************
-*                      ----Stay Hungry Stay Foolish----                      *
-*    @author    :   Shen                                                     *
-*    @name      :   HDU 4686                                                 *
-*****************************************************************************/
-
-#include <iostream>
-#include <algorithm>
-#include <cstdio>
-#include <cstring>
-using namespace std;
-typedef long long int64;
-
-const int MaxN = 5;
-const int MaxM = 5;
-const int Mod = 1000000007;
+const int MAXN = 5;
+const int MAXM = 5;
+const int MOD = 1000000007;
 
 struct Matrix
 {
     int n, m;
-    int64 mat[MaxN][MaxM];
+    int64 mat[MAXN][MAXM];
     Matrix(): n(-1), m(-1){}
-    Matrix(int _n, int _m): n(_n), m(_m)
+    Matrix(int _n, int _m, bool lazy = false): n(_n), m(_m)
     {
-        memset(mat, 0, sizeof(mat));
+        if (!lazy) memset(mat, 0, sizeof mat);
     }
     void Unit(int _s)
     {
         n = _s; m = _s;
-        for (int i = 0; i < n; i++)
-            for (int j = 0; j < n; j++)
-                mat[i][j] = (i == j)? 1: 0;
+        memset(mat, 0, sizeof mat);
+        while (_s--) mat[_s][_s] = 1;
     }
     void print()
     {
@@ -43,7 +29,7 @@ struct Matrix
     }
 };
 
-Matrix add_mod(const Matrix& a, const Matrix& b, const int64 mod)
+Matrix add_mod(const Matrix& a, const Matrix& b, const int mod)
 {
     Matrix ans(a.n, a.m);
     for (int i = 0; i < a.n; i++) for (int j = 0; j < a.m; j++)
@@ -54,86 +40,66 @@ Matrix add_mod(const Matrix& a, const Matrix& b, const int64 mod)
 Matrix mul(const Matrix& a, const Matrix& b)
 {
     Matrix ans(a.n, b.m);
-    for (int i = 0; i < a.n; i++) for (int j = 0; j < b.m; j++)
-    {
-        int64 tmp = 0;
+    for (int i = 0; i < a.n; i++)
         for (int k = 0; k < a.m; k++)
-            tmp += a.mat[i][k] * b.mat[k][j];
-        ans.mat[i][j] = tmp;
-    }
+            for (int j = 0; j < b.m; j++)
+                ans.mat[i][j] += a.mat[i][k] * b.mat[k][j];
     return ans;
 }
 
 Matrix mul_mod(const Matrix& a, const Matrix& b, const int mod)
 {
     Matrix ans(a.n, b.m);
-    for (int i = 0; i < a.n; i++) for (int j = 0; j < b.m; j++)
+    for (int i = 0; i < a.n; i++)
+        for (int k = 0; k < a.m; k++) if (a.mat[i][k])
+            for (int j = 0; j < b.m; j++)
     {
-        int64 tmp = 0;
-        for (int k = 0; k < a.m; k++)
-            tmp += (a.mat[i][k] * b.mat[k][j]) % mod;
-        ans.mat[i][j] = tmp % mod;
+        int64 tmp = (a.mat[i][k] * b.mat[k][j]) % mod;
+        ans.mat[i][j] = (ans.mat[i][j] + tmp) % mod;
     }
     return ans;
 }
 
 Matrix pow_mod(const Matrix& a, int64 k, const int mod)
 {
-    Matrix p(a.n,a.m), ans(a.n,a.m);
-    p = a; ans = a;
-    ans.Unit(a.n);
-    if (k == 0) return ans;
-    else if (k == 1) return a;
-    else
+    Matrix ans(a.n, a.m, true); ans.Unit(a.n);
+    if (k <= 1) return k == 0 ? ans : a;
+    Matrix p(a);
+    while (k)
     {
-        while (k)
-        {
-            if (k & 1) { ans=mul_mod(ans, p, mod); k--; }
-            else { k /= 2; p = mul_mod(p, p, mod); }
-        }
-        return ans;
+        if (k & 1) { ans = mul_mod(ans, p, mod); k--; }
+        else { k /= 2; p = mul_mod(p, p, mod); }
     }
+    return ans;
 }
 
-int64 n;
-int64 a0, ax, ay;
-int64 b0, bx, by;
+int64 n, a0, ax, ay, b0, bx, by;
 
 void solve()
 {
-    Matrix ans(5, 1);
-
-    Matrix beg(5, 1);
+    Matrix ans(5, 1), beg(5, 1), cef(5, 5);
     beg.mat[0][0] = 1;
     beg.mat[1][0] = a0;
     beg.mat[2][0] = b0;
-    beg.mat[3][0] = a0 * b0 % Mod;
+    beg.mat[3][0] = a0 * b0 % MOD;
     beg.mat[4][0] = 0;
 
-    Matrix cef(5, 5);
-    memset(cef.mat, 0, sizeof(cef.mat));
     cef.mat[0][0] = 1;
-    cef.mat[1][0] = ay % Mod; cef.mat[1][1] = ax % Mod;
-    cef.mat[2][0] = by % Mod; cef.mat[2][2] = bx % Mod;
-    cef.mat[3][0] = ay * by % Mod; cef.mat[3][1] = ax * by % Mod;
-    cef.mat[3][2] = ay * bx % Mod; cef.mat[3][3] = ax * bx % Mod;
+    cef.mat[1][0] = ay % MOD; cef.mat[1][1] = ax % MOD;
+    cef.mat[2][0] = by % MOD; cef.mat[2][2] = bx % MOD;
+    cef.mat[3][0] = ay * by % MOD; cef.mat[3][1] = ax * by % MOD;
+    cef.mat[3][2] = ay * bx % MOD; cef.mat[3][3] = ax * bx % MOD;
     cef.mat[4][3] = 1; cef.mat[4][4] = 1;
 
-    Matrix tmp(5, 5);
-    tmp = pow_mod(cef, n, Mod);
-    ans = mul_mod(tmp, beg, Mod);
-
+    Matrix tmp(5, 5, true);
+    tmp = pow_mod(cef, n, MOD);
+    ans = mul_mod(tmp, beg, MOD);
     cout << ans.mat[4][0] << endl;
     return;
 }
 
 int main()
 {
-    while (cin >> n)
-    {
-        cin >> a0 >> ax >> ay;
-        cin >> b0 >> bx >> by;
-        solve();
-    }
+    while (cin >> n >> a0 >> ax >> ay >> b0 >> bx >> by) solve();
     return 0;
 }

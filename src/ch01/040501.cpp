@@ -1,34 +1,4 @@
-// <!--encoding UTF-8 UTF-8编码--!>
-/*****************************************************************************
-*                      ----Stay Hungry Stay Foolish----                      *
-*    @author    :   Shen                                                     *
-*    @name      :   HDU 1402                                                 *
-*****************************************************************************/
-
-#include <map>
-#include <list>
-#include <queue>
-#include <stack>
-#include <cmath>
-#include <vector>
-#include <string>
-#include <cstdio>
-#include <cstring>
-#include <cstdlib>
-#include <iostream>
-#include <algorithm>
-using namespace std;
-typedef long long int64;
-template<class T>inline bool updateMin(T& a, T b){ return a > b ? a = b, 1: 0; }
-template<class T>inline bool updateMax(T& a, T b){ return a < b ? a = b, 1: 0; }
-inline int    nextInt() { int x; scanf("%d", &x); return x; }
-inline int64  nextI64() { int64  d; cin >> d; return d; }
-inline char   nextChr() { scanf(" "); return getchar(); }
-inline string nextStr() { string s; cin >> s; return s; }
-inline double nextDbf() { double x; scanf("%lf", &x); return x; }
-inline int64  nextlld() { int64 d; scanf("%lld", &d); return d; }
-inline int64  next64d() { int64 d; scanf("%I64d",&d); return d; }
-
+// Begin as namespace FFT
 const double PI = acos(-1.0);
 struct Complex
 {
@@ -82,11 +52,12 @@ void fft(Complex y[], int len, int on)
     if (on == -1) for (int i = 0; i < len; i++)
         y[i].x /= len;
 }
+// End as namespace FFT
 
-const int MaxN = 200010;
-Complex x1[MaxN], x2[MaxN];
-char str1[MaxN / 2], str2[MaxN / 2];
-int sum[MaxN];
+const int MAXN = 200010;
+Complex x1[MAXN], x2[MAXN];
+char str1[MAXN / 2], str2[MAXN / 2];
+int sum[MAXN];
 
 void solve()
 {

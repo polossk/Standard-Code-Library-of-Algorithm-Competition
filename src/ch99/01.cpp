@@ -1,18 +1,12 @@
-//适用于正负整数
-template <class T> inline bool scan_d(T &ret)
-{
-    char c; int sgn;
-    if (c = getchar(), c == EOF) return 0; //EOF
-    while (c != '-' && (c < '0' || c > '9')) c = getchar();
-    sgn = (c == '-')? -1: 1;
-    ret = (c == '-')? 0: (c - '0');
-    while (c = getchar(), c >= '0' && c <= '9')
-		ret = ret * 10 + (c - '0');
-    ret *= sgn;
-    return 1;
-}
-
-inline void out(int x)
-{
-    if (x > 9) out(x / 10); putchar(x % 10 + '0');
-}
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long int64;
+template<class T>inline bool updateMin(T& a, T b){ return a > b ? a = b, 1: 0; }
+template<class T>inline bool updateMax(T& a, T b){ return a < b ? a = b, 1: 0; }
+inline int    nextInt() { int x; scanf("%d", &x); return x; }
+inline int64  nextI64() { int64  d; cin >> d; return d; }
+inline char   nextChr() { scanf(" "); return getchar(); }
+inline string nextStr() { string s; cin >> s; return s; }
+inline double nextDbf() { double x; scanf("%lf", &x); return x; }
+inline int64  nextlld() { int64 d; scanf("%lld", &d); return d; }
+inline int64  next64d() { int64 d; scanf("%I64d",&d); return d; }
