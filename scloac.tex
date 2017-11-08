@@ -1,6 +1,6 @@
 \documentclass[12pt,a4paper,openany,oneside]{book}
 %------------------------------------------------------------------------------%
-\newcommand\artversion{1.0.9}
+\newcommand\artversion{1.0.11}
 \newcommand\shorttitle{SCL of AC}
 \newcommand\strtitle{Standard Code Library of Algorithm Competition}
 \newcommand\strauthor{polossk, cfrpg, pr0grammer}
@@ -10,6 +10,7 @@
 
 %------------------------------------------------------------------------------%
 \input{book-setting}
+\usepackage{multicol}
 %------------------------------------------------------------------------------%
 \begin{document}
 %------------------------------------------------------------------------------%
@@ -43,7 +44,9 @@
 \clearpage
 \phantomsection
 \addcontentsline{toc}{chapter}{\fHei 目录}
+\begin{multicols}{2}
 \tableofcontents
+\end{multicols}
 \clearpage
 
 %------------------------------------------------------------------------------%

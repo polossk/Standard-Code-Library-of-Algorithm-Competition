@@ -1,7 +1,7 @@
 % pdf 设置区
 %---------------------------------纸张大小设置---------------------------------%
 \usepackage{geometry}
-\geometry{left=2.05cm,right=2.05cm,top=2.5cm,bottom=2.5cm}
+\geometry{a4paper,left=1.91cm,right=1.91cm,top=2.05cm,bottom=2.05cm}
 %------------------------------------------------------------------------------%
 
 
@@ -169,13 +169,13 @@
 
 % 定义目录中各级标题之间的格式以及缩进
 % \dottedcontents{chapter}[0.0em]{\fHei\vspace{0.5em}}{0.0em}{5pt}
-% \dottedcontents{section}[1.16cm]{}{1.8em}{5pt}
-% \dottedcontents{subsection}[2.00cm]{}{2.7em}{5pt}
-% \dottedcontents{subsubsection}[2.86cm]{}{3.4em}{5pt}
-% \titlecontents{chapter}[0pt]{\fHei\vspace{0.5em}}%
-%     {\contentsmargin{0pt}\fHei\makebox[0pt][l]{\chapterID{\thecontentslabel}}\hspace{3.8em}}%
-%     {\contentsmargin{0pt}\fHei}%
-%     {}[\vspace{0em}]
+\dottedcontents{section}[1.16cm]{}{1.8em}{5pt}
+\dottedcontents{subsection}[2.00cm]{}{2.7em}{5pt}
+\dottedcontents{subsubsection}[2.86cm]{}{3.4em}{5pt}
+\titlecontents{chapter}[0pt]{\fHei\vspace{0.5em}}%
+    {\contentsmargin{0pt}\fHei\makebox[0pt][l]{\chapterID{\thecontentslabel}}\hspace{3.8em}}%
+    {\contentsmargin{0pt}\fHei}%
+    {\titlerule*[.5pc]{.}\contentspage}[\vspace{0em}]
 
 
 %------------------------------------------------------------------------------%
@@ -228,10 +228,11 @@
     tabsize=4,
     extendedchars=true,
     breaklines=true,
-    keywordstyle=\color{blue},
+    keywordstyle=\color{blue}\bfseries,
     numberstyle=\color{purple},
-    commentstyle=\color{olive},
-    stringstyle=\color{orange}\ttfamily,
+    commentstyle=\color[rgb]{0, 0.4, 0}\bfseries,
+    stringstyle=\color{violet}\ttfamily\bfseries,
+    rulesepcolor=\color{red!20!green!20!blue!20},
     showspaces=false,
     showtabs=false,
     framexrightmargin=5pt,

@@ -106,7 +106,7 @@ void solve()
 
 int main()
 {
-    srand(19260817); // only in POJ, use srand(time(0)) otherwise
+    srand(19260817); // only in POJ, use srand(time(0)) instead
     t = nextInt(); while (t--) solve();
     return 0;
 }

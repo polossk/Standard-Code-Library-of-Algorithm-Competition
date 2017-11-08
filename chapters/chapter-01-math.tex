@@ -906,76 +906,48 @@ midmid法选取参照点, 即同时做两个操作, $mid := (r + l) / 2$和$mid 
 %---------------------------------------
 普通的多项式乘法的时间复杂度基本为$O(N^2)$, 不过却有一个更快的方法, 那就
 是利用快速傅里叶变换, 使得时间复杂度优化至$(N\log N)$.
-
 如果我们把多项式看做一个向量形式, 即只考虑多项式的系数, 那么, 多项式的乘
 法即相当于求解向量的卷积.一个更好的思路是, 将两个多项式转化为点值表达.
-
 通俗的讲.对于多项式
-
-\begin{equation}
-A(x) = a_{0} + a_{1}x + \cdots + a_{n-1}x^{n-1} + a_{n}x^{n}
-\end{equation}
+$A(x) = a_{0} + a_{1}x + \cdots + a_{n-1}x^{n-1} + a_{n}x^{n}$,
 
 它的向量表达是$(a_{0},  a_{1}, \cdots , a_{n-1}, a_{n})$, 如果这个多项式经
 过n个不同的点, 即$y_k = A(x_k), x_i \neq x_j$, 则这些点所能构成的一个集合
-
-\begin{equation}
-\{(x_0, y_0), (x_1, y_1), \cdots , (x_{n - 1}, y_{n - 1})\}
-\end{equation}
-
-该集合也被称为点值表达.
-
-对于一个多项式, 可以通过计算出点值表达, 也可以通过进行多项式插值, 得到原多项式.
-
-下面说明如何利用傅里叶变换求多项式乘法.
+$\{(x_0, y_0), (x_1, y_1), \cdots , (x_{n - 1}, y_{n - 1})\}$.
+该集合也被称为点值表达. 对于一个多项式, 可以通过计算出点值表达, 也可以通过进行多项式插值, 得到原多项式. 
 
 众所周知, 若多项式$A(x)$和$B(x)$的点值表达分别为
 
-\begin{equation}
-A(x) := \{(x_0, y_0), (x_1, y_1), \cdots , (x_{n - 1}, y_{n - 1})\}
-\end{equation}
+\[ \begin{aligned}
+A(x) &:= \mclosurebrace{(x_0, y_0), (x_1, y_1), \cdots , (x_{n - 1}, y_{n - 1})} \\
+B(x) &:= \mclosurebrace{(x_0, y'_0), (x_1, y'_1), \cdots , (x_{n - 1}, y'_{n - 1})}
+\end{aligned} \]
 
-与
-
-\begin{equation}
-B(x) := \{(x_0, {y_0}'), (x_1, {y_1}'), \cdots , (x_{n - 1}, {y_{n - 1}}')\}
-\end{equation}
-
-那么记多项式$C(x) = A(x)B(x)$, 则显然, $\partial (C(x)) = \partial (A(x)) + \partial (B(x))$, 
-
-所以, 如果多项式$A(x)$和$B(x)$的点值表达的点值数目达到$\partial (A(x)) + \partial (B(x))$
+那么记多项式$C(x) = A(x)B(x)$, 则显然, $\partial (C(x)) = \partial (A(x)) + \partial (B(x))$, 所以, 如果多项式$A(x)$和$B(x)$的点值表达的点值数目达到$\partial (A(x)) + \partial (B(x))$
 就可以得到
 
-\begin{equation}
-A(x) := \{(x_0, y_0), (x_1, y_1), \cdots , (x_{2n - 1}, y_{2n - 1})\}
-\end{equation}
-
-与
-
-\begin{equation}
-B(x) := \{(x_0, {y_0}'), (x_1, {y_1}'), \cdots , (x_{2n - 1}, {y_{2n - 1}}')\}
-\end{equation}
+\[ \begin{aligned}
+A(x) &:= \mclosurebrace{(x_0, y_0), (x_1, y_1), \cdots , (x_{2n - 1}, y_{2n - 1})} \\
+B(x) &:= \mclosurebrace{(x_0, y'_0), (x_1, y'_1), \cdots , (x_{2n - 1}, y'_{2n - 1})}
+\end{aligned} \]
 
 故有：
 
 \begin{equation}
-C(x) := \{(x_0, y_0{y_0}'), (x_1, y_1{y_1}'), \cdots , (x_{2n - 1}, y_{2n - 1}{y_{2n - 1}}')\}
+C(x) := \{(x_0, y_0y'_0), (x_1, y_1y'_1), \cdots , (x_{2n - 1}, y_{2n - 1}y'_{2n - 1})\}
 \end{equation}
 
 此时可以用多项式插值求出其向量表达.
 
 总结如下：
-
-(1)\ 向量形式求值, 得到长度为2n的点值列, 时间复杂度$O(N \log N)$；
-
-(2)\ 点值乘法, 得到$C(x)$的点值表达, 时间复杂度$O(N)$；
-
-(3)\ 多项式插值, 得到长度为2n的向量形式, 时间复杂度$O(N \log N)$.
+\begin{enumerate}[parsep=0pt, itemsep=0pt, leftmargin=8em]
+\item 向量形式求值, 得到长度为2n的点值列, 时间复杂度$O(N \log N)$；
+\item 点值乘法, 得到$C(x)$的点值表达, 时间复杂度$O(N)$；
+\item 多项式插值, 得到长度为2n的向量形式, 时间复杂度$O(N \log N)$.
+\end{enumerate}
 
 另外选择单位复数根作为求值点, 并且通过分治加速傅里叶变换, 就可以得到时间复杂度为$(N\log N)$
-的计算多项式乘法的高效算法了.
-
-具体的实现利用到了一种“蝴蝶操作”, 其简要原理如下：
+的计算多项式乘法的高效算法了. 具体的实现利用到了一种“蝴蝶操作”, 其简要原理如下：
 
 \begin{equation}
 \begin{aligned}
@@ -988,13 +960,12 @@ y_{k}^{[1]} &\Rightarrow y_{k}^{[0]} - \omega ^{k}_{N}y_{k}^{[1]}.\\
 
 另外有几处使用说明：
 
-(1)\ 保证高位有足够的0；
-
-(2)\ FFT要求len必须为二的幂次, 所以必须补齐0；
-
-(3)\ DFT要求是定义在复数上的, 所以有与整数的变换要求；
-
-(4)\ 高精度乘法需要在多项式乘法的基础上实现进位.
+\begin{enumerate}[parsep=0pt, itemsep=0pt, leftmargin=8em]
+\item 保证高位有足够的0；
+\item FFT要求len必须为二的幂次, 所以必须补齐0；
+\item DFT要求是定义在复数上的, 所以有与整数的变换要求；
+\item 高精度乘法需要在多项式乘法的基础上实现进位.
+\end{enumerate}
 
 \begin{longtable}{|c|l|l|}
 复杂度 & $O(N\log N)$ &  \\
