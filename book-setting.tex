@@ -1,16 +1,11 @@
 % pdf 设置区
 %---------------------------------纸张大小设置---------------------------------%
 \usepackage{geometry}
-\geometry{a4paper,left=1.91cm,right=1.91cm,top=2.05cm,bottom=2.05cm}
+\geometry{a4paper,left=2.05cm,right=2.05cm,top=2.5cm,bottom=2.5cm}
 %------------------------------------------------------------------------------%
 
 
 %----------------------------------必要库支持----------------------------------%
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsfonts}
-\usepackage{mathrsfs}
-\usepackage{bm}
 \usepackage{xcolor}
 \usepackage{tikz}
 \usepackage{layouts}
@@ -162,7 +157,7 @@
 
 
 % 缩小正文中各级标题之间的缩进
-\titlespacing{\chapter}{0pt}{-3ex plus .1ex minus .2ex}{0.25em}
+\titlespacing{\chapter}{0pt}{3em plus .1em minus .2em}{0.25em}
 \titlespacing{\section}{0pt}{-0.2em}{0em}
 \titlespacing{\subsection}{0pt}{0.5em}{0em}
 \titlespacing{\subsubsection}{0pt}{0.25em}{0pt}
@@ -177,6 +172,13 @@
     {\contentsmargin{0pt}\fHei}%
     {\titlerule*[.5pc]{.}\contentspage}[\vspace{0em}]
 
+% 删除 chapter 分页
+\usepackage{xpatch}
+\makeatletter
+\xpatchcmd{\chapter}
+  {\if@openright\cleardoublepage\else\clearpage\fi}{\par\relax}
+  {}{}
+\makeatother
 
 %------------------------------------------------------------------------------%
 
@@ -223,6 +225,7 @@
     rulesepcolor=\color{red!20!green!20!blue!20},
     showspaces=false,
     showtabs=false,
+    frame=shadowbox,
     framexrightmargin=5pt,
     framexbottommargin=4pt,
     showstringspaces=false,
