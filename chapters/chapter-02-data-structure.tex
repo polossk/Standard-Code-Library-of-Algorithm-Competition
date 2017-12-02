@@ -9,7 +9,6 @@
 %---------------------------------------
 	\subsection{并查集}\small
 %---------------------------------------
-%------------------------------------------------------------------------------%
 维护一些不相交的集合, 支持两种操作: 合并两个集合, 查询一个元素所处的集合.
 
 维护一个森林, 每一棵树表示一个集合, 树根元素为这个集合的代表元. 数组
@@ -20,15 +19,18 @@
 化 2: 启发式合并, 用数组 {\tt rank[]} 维护集合的高度, 每次将较小的集合合并到较大
 的集合上, 而合并两个相同高度的集合时更新高度.
 
-\begin{longtable}{|c|l|l|}
-成员变量 & & \\
+\begin{longtable}{c|l|l} \hline\hline
+\multicolumn{3}{l}{{\tt DisjointSet<Max\_Size>}成员变量} \\ \hline
+& \verb`int Max_Size` & 初始化最大容量 \\
 & \verb`int fa[]` & 元素的父节点 \\
 & \verb`int rk[]` & 集合的高度, rank \\
-成员函数 & & \\
+\hline
+\multicolumn{3}{l}{{\tt DisjointSet<Max\_Size>}成员函数} \\ \hline
 $O(n)$ & \verb`void init(int n)` & 初始化并查集, n 个独立元素 \\
 $O(1)$ & \verb`int find(int x)` & 查找 x 所在集合的代表元 \\
 $O(1)$ & \verb`bool query(int x, int y)` & x, y 是否在同一集合 \\
 $O(1)$ & \verb`void merge(int x, int y)` & 合并 x, y 两个集合 \\
+\hline\hline
 \end{longtable}
 \lstinputlisting[language={C++}]{./src/ch02/0201-DisjointSet.cpp}
 
@@ -36,7 +38,62 @@ $O(1)$ & \verb`void merge(int x, int y)` & 合并 x, y 两个集合 \\
 %---------------------------------------
 	\subsection{块状链表}\small
 %---------------------------------------
+%------------------------------------------------------------------------------%
+维护一个数据结构, 支持插入, 删除, 查询等操作, 同时要求时间复杂度均摊尽可能小.
 
+构造一种块状链表的数据结构, 链表的每一个节点存储一个块, 块内包含数组和所需要维护
+的必要数据. 如果整个数据量为 $N$, 链表的规模为 $n$, 每一个块的大小为 $m$, 则显然
+满足等式 $N = n \times m$. 则插入, 删除, 查询操作都可以通过遍历块状链表确定操作
+块, 然后在块内进行操作来完成. 故三种操作的时间复杂度均为 $O(n + m)$. 一般地, 可
+以将 $n = m = \sqrt{N}$, 这样均摊时间复杂度为 $O(\sqrt{N})$.
+
+对于所有操作, 均要求所有块的大小尽可能维持在 $\sqrt{N}$ 与 $2\sqrt{N}$ 之间. 这
+样可以保证 $n \leq \sqrt{N}$, 从而保证时间复杂度. 对于插入操作, 如果插入后的块的
+大小超过了 $2\sqrt{N}$, 应当分割为两个大小相等的块. 对于删除与查询操作, 由于元素
+数量不增加, 所以不会提高时间复杂度.
+
+如果需要额外维护数据, 需要找出所维护的数据在插入与删除操作中的具体变化. 例如要求
+维护最值: 在插入元素时, \verb`maintain := op(maintain, x)`, 如果发生了块分裂则重
+新统计各个块的最值; 在删除元素时, 除非删除元素恰为最值, 否则不需要重新统计维护.
+
+如果不涉及额外维护操作, 则可以根据不同的操作的工作量确定更小操作常数的方法. 例如
+可以将朴素的 $O(\sqrt{N})$ 的可以改进为 $O(\log N)$ 的二分查找, 但是需要在每次插
+入和删除操作时额外耗费 $O(\sqrt{N})$ 的操作以建立块的大小的前缀和数组. 假设共有
+$M$ 次插入删除操作, $Q$次独立的查询操作, 开始时块状链表的大小为 $N$, 那么全体操
+作的时间复杂度上限为 $O((M + Q)\sqrt{N + M})$, 而添加了二分操作后的时间复杂度上
+限为 $O(M\sqrt{N + M}) + O((M + Q)\log (N + M) \sqrt{N + M})$. 另外注意此时要求
+使用 \verb`vector<Block<Tp> > fat` 而非原始的 \verb`list<Block<Tp> > fat`.
+
+\begin{longtable}{c|l|l} \hline\hline
+\multicolumn{3}{l}{{\tt Block<Tp>}成员变量} \\ \hline
+& \verb`vector<Tp> arr` & 块内数组 \\
+& \verb`Tp maintain` & 块内维护数据 \\
+\hline
+\multicolumn{3}{l}{{\tt Block<Tp>}成员函数} \\ \hline
+$O(1)$ & \verb`Block(Tp val)` & 构造函数, 只包含一个元素 val \\
+$O(len)$ & \verb`Block(vector<Tp> vals)` & 构造函数, 复制整个数组 vals \\
+\hline
+\multicolumn{3}{l}{{\tt BlockList<Tp>}成员变量} \\ \hline
+& \verb`list<Block<Tp> > fat` & 块状链表本体 \\
+& \verb`vector<int> sum` & 块大小前缀和(不必要) \\
+& \verb`int block_capacity` & 块大小上限 \\
+& \verb`typedef list<Block<Tp> >::iterator iter` & 块指针数据类型 \\
+\hline
+\multicolumn{3}{l}{{\tt BlockList<Tp>}成员函数} \\ \hline
+$O(1)$ & \verb`iter next(const iter &_)` & 返回下一个块 \\
+$O(1)$ & \verb`int blocksize(const iter &_) ` & 返回块大小 \\
+$O(\sqrt{N})$ & \verb`void maintain()` & 维护块大小前缀和(不必要) \\
+$O(len)$ & \verb`void init(int cap, InputIt first, InputIt last)` & 从 [first, last) 构造 \\
+$O(len)$ & \verb`void init(int cap, InputIt src, int len)` & 从 [src, src+len) 构造\\
+$O(\sqrt{N})$ & \verb`pair<iter, int> get_block(int pos)` & 返回 pos 所在块和块内偏移量 \\
+$O(\log N)$ & \verb`pair<iter, int> get_block_bs(int pos)` & 基于二分查找(不必要) \\
+$O(\sqrt{N})$ & \verb`void insert(int pos, Tp val)` & 在第 pos 位前插入元素 val \\
+$O(\sqrt{N})$ & \verb`void remove(int pos)` & 删除第 pos 位的元素 \\
+$O(\sqrt{N})$ & \verb`Tp at(int pos)` & 查询第 pos 位的元素 \\
+$O(N)$ & \verb`void __dbg__()` & 打印整个块状链表 \\
+\hline\hline
+\end{longtable}
+\lstinputlisting[language={C++}]{./src/ch02/0202-BlockList.cpp}
 
 %---------------------------------------
 	\subsection{ST表}\small
