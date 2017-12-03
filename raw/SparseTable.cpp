@@ -1,6 +1,6 @@
 /// Begin as namespace SparseTable
 template<typename Tp, int Max_Size = 100005> struct SparseTable {
-    int preLog2[Max_Size]; Tp arr[Max_Size][32];
+    int preLog2[Max_Size]; Tp a[Max_Size][32];
 
     void init(int n)
     {
@@ -23,18 +23,18 @@ template<typename Tp, int Max_Size = 100005> struct SparseTable {
     {
         for (int i = len - 1; i >= 0; i--)
         {
-            arr[i][0] = src[i];
+            a[i][0] = src[i];
             for (int j = 1; (i + (1 << j ) - 1) < len; j++)
             {
-                arr[i][j] = min(arr[i][j - 1], arr[i + (1 << j - 1)][j - 1]);
+                a[i][j] = min(a[i][j - 1], a[i + (1 << j - 1)][j - 1]);
             }
         }
     }
 
     inline Tp query(int l, int r)
     {
-        int len = r - l + 1, k = preLog2[len];
-        return min(arr[l][k], arr[r - (1 << k) + 1][k]);
+        int k = preLog2[r - l + 1];
+        return min(a[l][k], a[r - (1 << k) + 1][k]);
     }
 };
 /// End as namespace SparseTable
