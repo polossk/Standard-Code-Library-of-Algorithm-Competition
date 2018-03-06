@@ -1,16 +1,17 @@
 % math-symbols.tex
-% by polossk, version 1.2.3
-% last update 2017-11-12
+% by polossk, version 1.2.5.3
+% last update 2017-12-5
 % github.com/polossk/Math-Symbols-in-LaTeX
 %------------------------------------------------------------------------------%
 %-Packages---------------------------------------------------------------------%
 %------------------------------------------------------------------------------%
+\usepackage{bm}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{amsfonts}
 \usepackage{mathrsfs}
-\usepackage{bm}
+\usepackage{mathtools}
 %------------------------------------------------------------------------------%
 %-Math-Fonts-------------------------------------------------------------------%
 %------------------------------------------------------------------------------%
@@ -25,6 +26,7 @@
 %-Constants-and-Useful-Symbols-------------------------------------------------%
 %------------------------------------------------------------------------------%
 \newcommand\mi{{\mathrm i}}                                % constant i
+\newcommand\mj{{\mathrm j}}                                % constant j
 \newcommand\me{{\mathrm e}}                                % constant e
 \newcommand\mnatr{{\mathbb N}}                             % natural num set N
 \newcommand\mintg{{\mathbb Z}}                             % integer set Z
@@ -205,14 +207,17 @@
 %------------------------------------------------------------------------------%
 %-Useful-Aliases-and-Generators------------------------------------------------%
 %------------------------------------------------------------------------------%
-\newcommand\fracdiffs[1]{{\frac{\diff}{\diff {#1}}}}
-\newcommand\fracdiffd[2]{{\frac{\diff {#1}}{\diff {#2}}}}
-\newcommand\dfracdiffs[1]{{\dfrac{\diff}{\diff {#1}}}}
-\newcommand\dfracdiffd[2]{{\dfrac{\diff {#1}}{\diff {#2}}}}
-\newcommand\fracpartials[1]{{\frac{\partial}{\partial {#1}}}}
-\newcommand\fracpartiald[2]{{\frac{\partial {#1}}{\partial {#2}}}}
-\newcommand\dfracpartials[1]{{\dfrac{\partial}{\partial {#1}}}}
-\newcommand\dfracpartiald[2]{{\dfrac{\partial {#1}}{\partial {#2}}}}
+\newcommand\fracdiff[2]{{\frac{\diff {#1}}{\diff {#2}}}}
+\newcommand\fracdiffs[1]{{\fracdiff{}{#1}}}
+\newcommand\dfracdiff[2]{{\dfrac{\diff {#1}}{\diff {#2}}}}
+\newcommand\dfracdiffs[1]{{\dfracdiff{}{#1}}}
+\newcommand\fracpartial[2]{{\frac{\partial {#1}}{\partial {#2}}}}
+\newcommand\fracpartials[1]{{\fracpartial{}{#1}}}
+\newcommand\dfracpartial[2]{{\dfrac{\partial {#1}}{\partial {#2}}}}
+\newcommand\dfracpartials[1]{{\dfracpartial{}{#1}}}
+
+
+\newcommand\mfwhen[2]{{\left.{#1} \right|}_{#2}}
 
 \newcommand\mclosure[1]{{\left( {#1} \right)}}
 \newcommand\mclosuresquare[1]{{\left[ {#1} \right]}}
@@ -224,9 +229,10 @@
 \newcommand\mvctzt[2]{{ \mvctz{#1}{#2}^T }}
 
 \newcommand\mequlist[1]{{\left\{ \begin{aligned} #1 \end{aligned} \right.}}
+\newenvironment{equlist}{\left\{ \begin{aligned} }{ \end{aligned} \right.}
 %------------------------------------------------------------------------------%
 %------------------------------------------------------------------------------%
 %------------------------------------------------------------------------------%
 \endinput
 % 这是所有常用的数学符号的导言区设置，不能单独编译。
-% by ruby script
+% build by ruby and python scripts
