@@ -1,7 +1,7 @@
 int summ[MAXN];
 void getPrefixSum()
 {
-    std::partial_sum(mu, mu + MAXN, sumu);
+    std::partial_sum(mu, mu + MAXN, summ);
     // summ[0] = 0;
     // for (int i = 1; i < MAXN; i++)
     //     summ[i] = summ[i - 1] + mu[i];

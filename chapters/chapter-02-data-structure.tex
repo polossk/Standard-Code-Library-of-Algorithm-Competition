@@ -1,6 +1,5 @@
 \chapter{数据结构}
 
-% \lstinputlisting[language={C++}]{./src/ch02/}
 %---------------------------------------
 \section{花式打表}\small
 %---------------------------------------
@@ -9,7 +8,7 @@
 %---------------------------------------
 	\subsection{并查集}\small
 %---------------------------------------
-维护一些不相交的集合, 支持两种操作: 合并两个集合, 查询一个元素所处的集合.
+维护一个数据结构, 支持两种操作: 合并两个集合, 查询一个元素所处的集合.
 
 维护一个森林, 每一棵树表示一个集合, 树根元素为这个集合的代表元. 数组
 {\tt father[]} 维护每一个元素的父节点. 在查询时, 只需要不断寻找父节点, 即可以找
@@ -19,19 +18,21 @@
 化 2: 启发式合并, 用数组 {\tt rank[]} 维护集合的高度, 每次将较小的集合合并到较大
 的集合上, 而合并两个相同高度的集合时更新高度.
 
-\begin{longtable}{c|l|l} \hline\hline
-\multicolumn{3}{l}{{\tt DisjointSet<Max\_Size>}成员变量} \\ \hline
+\begin{longtable}{c|l|l}
+\multicolumn{3}{c}{{\tt DisjointSet<Max\_Size>}} \\ \hline\hline
+\multicolumn{3}{l}{成员变量} \\ \hline
 & \verb`int Max_Size` & 初始化最大容量 \\
 & \verb`int fa[]` & 元素的父节点 \\
 & \verb`int rk[]` & 集合的高度, rank \\
 \hline
-\multicolumn{3}{l}{{\tt DisjointSet<Max\_Size>}成员函数} \\ \hline
-$O(n)$ & \verb`void init(int n)` & 初始化并查集, n 个独立元素 \\
-$O(1)$ & \verb`int find(int x)` & 查找 x 所在集合的代表元 \\
-$O(1)$ & \verb`bool query(int x, int y)` & x, y 是否在同一集合 \\
-$O(1)$ & \verb`void merge(int x, int y)` & 合并 x, y 两个集合 \\
+\multicolumn{3}{l}{成员函数} \\ \hline
+$O(n)$ & \verb`void init(n)` & 初始化并查集, n 个独立元素 \\
+$O(1)$ & \verb`int find(x)` & 查找 x 所在集合的代表元 \\
+$O(1)$ & \verb`bool query(x, y)` & x, y 是否在同一集合 \\
+$O(1)$ & \verb`void merge(x, y)` & 合并 x, y 两个集合 \\
 \hline\hline
 \end{longtable}
+
 \lstinputlisting[language={C++}]{./src/ch02/0201-DisjointSet.cpp}
 
 
@@ -64,41 +65,116 @@ $M$ 次插入删除操作, $Q$次独立的查询操作, 开始时块状链表的
 限为 $O(M\sqrt{N + M}) + O((M + Q)\log (N + M) \sqrt{N + M})$. 另外注意此时要求
 使用 \verb`vector<Block<Tp> > fat` 而非原始的 \verb`list<Block<Tp> > fat`.
 
-\begin{longtable}{c|l|l} \hline\hline
-\multicolumn{3}{l}{{\tt Block<Tp>}成员变量} \\ \hline
+\begin{longtable}{c|l|l}
+\multicolumn{3}{c}{{\tt Block<Tp>}} \\ \hline\hline
+\multicolumn{3}{l}{成员变量} \\ \hline
 & \verb`vector<Tp> arr` & 块内数组 \\
 & \verb`Tp maintain` & 块内维护数据 \\
 \hline
-\multicolumn{3}{l}{{\tt Block<Tp>}成员函数} \\ \hline
+\multicolumn{3}{l}{成员函数} \\ \hline
 $O(1)$ & \verb`Block(Tp val)` & 构造函数, 只包含一个元素 val \\
 $O(len)$ & \verb`Block(vector<Tp> vals)` & 构造函数, 复制整个数组 vals \\
-\hline
-\multicolumn{3}{l}{{\tt BlockList<Tp>}成员变量} \\ \hline
+\hline\hline
+\multicolumn{3}{c}{{\tt BlockList<Tp>}}\\ \hline\hline
+\multicolumn{3}{l}{成员变量} \\ \hline
 & \verb`list<Block<Tp> > fat` & 块状链表本体 \\
 & \verb`vector<int> sum` & 块大小前缀和(不必要) \\
 & \verb`int block_capacity` & 块大小上限 \\
 & \verb`typedef list<Block<Tp> >::iterator iter` & 块指针数据类型 \\
 \hline
-\multicolumn{3}{l}{{\tt BlockList<Tp>}成员函数} \\ \hline
+\multicolumn{3}{l}{成员函数} \\ \hline
 $O(1)$ & \verb`iter next(const iter &_)` & 返回下一个块 \\
 $O(1)$ & \verb`int blocksize(const iter &_) ` & 返回块大小 \\
 $O(\sqrt{N})$ & \verb`void maintain()` & 维护块大小前缀和(不必要) \\
-$O(len)$ & \verb`void init(int cap, InputIt first, InputIt last)` & 从 [first, last) 构造 \\
-$O(len)$ & \verb`void init(int cap, InputIt src, int len)` & 从 [src, src+len) 构造\\
-$O(\sqrt{N})$ & \verb`pair<iter, int> get_block(int pos)` & 返回 pos 所在块和块内偏移量 \\
-$O(\log N)$ & \verb`pair<iter, int> get_block_bs(int pos)` & 基于二分查找(不必要) \\
-$O(\sqrt{N})$ & \verb`void insert(int pos, Tp val)` & 在第 pos 位前插入元素 val \\
-$O(\sqrt{N})$ & \verb`void remove(int pos)` & 删除第 pos 位的元素 \\
-$O(\sqrt{N})$ & \verb`Tp at(int pos)` & 查询第 pos 位的元素 \\
+$O(len)$ & \verb`void init(cap, first, last)` & 从 [first, last) 构造 \\
+$O(len)$ & \verb`void init(cap, src, len)` & 从 [src, src+len) 构造 \\
+$O(\sqrt{N})$ & \verb`pair<iter, int> get_block(pos)` & 返回 pos 所在块和块内偏移量 \\
+$O(\log N)$ & \verb`pair<iter, int> get_block_bs(pos)` & 基于二分查找(不必要) \\
+$O(\sqrt{N})$ & \verb`void insert(pos, val)` & 在第 pos 位前插入元素 val \\
+$O(\sqrt{N})$ & \verb`void remove(pos)` & 删除第 pos 位的元素 \\
+$O(\sqrt{N})$ & \verb`Tp at(pos)` & 查询第 pos 位的元素 \\
 $O(N)$ & \verb`void __dbg__()` & 打印整个块状链表 \\
 \hline\hline
 \end{longtable}
+
 \lstinputlisting[language={C++}]{./src/ch02/0202-BlockList.cpp}
 
 %---------------------------------------
 	\subsection{ST表}\small
 %---------------------------------------
+%------------------------------------------------------------------------------%
+维护一个数据结构, 离线查询 $A[l], A[l + 1], \cdots, A[r]$ 的最小值(或最大值).
 
+用 $O(N\log N)$ 的时间预处理出数组 {\tt st[i, j]}, 表示从 $A[i]$ 开始连续
+$2^j$ 个元素中的极值. 其状态转移方程为:
+
+\lstinputlisting[language={Haskell}]{./src/ch02/0203-SparseTable.hs}
+
+对于每一次询问, 令 $k = \lfloor \log_2{r - l + 1} \rfloor$, 则闭区间 $[l, r]$
+的最小值为 $\min\{ st[l, k], st[r - 2^i + 1, k] \}$.
+
+\begin{longtable}{c|l|l}
+\multicolumn{3}{c}{{\tt SparseTable<Tp, Max\_Size>}} \\ \hline\hline
+\multicolumn{3}{l}{成员变量} \\ \hline
+& \verb`int Max_Size` & 初始化最大容量 \\
+& \verb`int preLog2[]` & {\tt preLog2[x]} $=\log_2 x$ \\
+& \verb`int a[][]` & {\tt st[][]} \\
+\hline
+\multicolumn{3}{l}{成员函数} \\ \hline
+$O(n)$ & \verb`void init(n)` & 初始化 ST 表, n 个独立元素 \\
+$O(n\log n)$ & \verb`void build(first, last)` & 从 [first, last) 构造 \\
+$O(n\log n)$ & \verb`void build(src, len)` & 从 [src, src+len) 构造 \\
+$O(1)$ & \verb`Tp query(l, r)` & 查询闭区间 $[l, r]$ 的最小值 \\
+\hline\hline
+\end{longtable}
+
+\lstinputlisting[language={C++}]{./src/ch02/0203-SparseTable.cpp}
+
+如果是二维区域 $[r_1, c_1] \rightarrow [r_2, c_2]$ 的最小值(或最大值), 则预处理出
+{\tt st[i, j, ki, kj]}, 表示从 $A[i, j]$ 为端点, 大小为 $[2^ki, 2^kj]$ 的矩形中
+所有元素的最小值. 其状态转移方程与一维情形类似. 对于每一次询问, 令
+$k_r = \lfloor \log_2{r_2 - r_1 + 1} \rfloor$,
+$k_c = \lfloor \log_2{c_2 - c_1 + 1} \rfloor$, $r_x = r_2 - 2^{k_r} + 1$,
+$c_x = c_2 - 2^{k_c} + 1$, 则闭区域 $[r_1, c_1] \rightarrow [r_2, c_2]$
+的最小值为 $\min \{ st[r_1, c_1, k_r, k_c], st[r_x, c_1, k_r, k_c],
+	st[r_1, c_x, k_r, k_c], st[r_x, c_x, k_r, k_c] \}$.
+
+\begin{longtable}{c|l|l}
+\multicolumn{3}{c}{{\tt SparseTable2D<Tp, Max\_Size>}} \\ \hline\hline
+\multicolumn{3}{l}{成员变量} \\ \hline
+& \verb`int Max_Size` & 初始化最大容量 \\
+& \verb`int preLog2[]` & {\tt preLog2[x]} $=\log_2 x$ \\
+& \verb`int a[][][][]` & {\tt st[][][][]} \\
+\hline
+\multicolumn{3}{l}{成员函数} \\ \hline
+$O(n)$ & \verb`void init(n)` & 初始化 ST 表, n 个独立元素 \\
+$O(n^2(\log n)^2)$ & \verb`void build(src, rows, cols)` & 从 {\tt src[]} 构造 \\
+$O(1)$ & \verb`Tp query(r1, r2, c1, c2)` & 查询闭区域 $[r_1, c_1] \rightarrow [r_2, c_2]$ 的最小值 \\
+\hline\hline
+\end{longtable}
+
+\lstinputlisting[language={C++}]{./src/ch02/0203-SparseTable2D.cpp}
+
+\global\csname @topnum\endcsname 0
+
+\begin{figure}[ht]
+	\centering
+	\begin{tabular}{c|c}
+		\makecell{
+		{\tt aaaaaaaa.....}\\
+		{\tt L...........R}\\
+		{\tt .....bbbbbbbb}
+		} & \makecell{
+		{\tt A....C.A....C}\\
+		{\tt |....|.|....|}\\
+		{\tt B....D.B....D}\\
+		{\tt A....C.A....C}\\
+		{\tt |....|.|....|}\\
+		{\tt B....D.B....D}
+		}
+	\end{tabular}
+	\caption{イラスト：Sparse Table}\label{fig-stable}
+\end{figure}
 
 %---------------------------------------
 \section{平衡树}\small
