@@ -1,7 +1,7 @@
 TEX      = xelatex
 MAIN     = scloac
 
-target: close wipe clean tex open
+target: close wipe clean tex clean open
 
 tex: $(MAIN).tex
 	$(TEX) $<
@@ -14,9 +14,9 @@ close:
 	cmd /c taskkill /im Acrobat.exe /t /f || echo not find
 
 clean:
-	del -f *.aux *.bbl *.blg *.log *.out *.gz *.toc *.thm
+	del /s /f *.aux *.bbl *.blg *.log *.out *.gz *.toc *.thm *.fdb_latexmk *.fls *.nav *.snm *.vrb
 
 wipe:
-	del -f $(MAIN).pdf
+	del /f $(MAIN).pdf
 
-.PHONY: clean
+.PHONY: open close clean wipe

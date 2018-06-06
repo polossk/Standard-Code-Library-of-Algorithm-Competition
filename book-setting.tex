@@ -1,7 +1,7 @@
 % pdf 设置区
 %---------------------------------纸张大小设置---------------------------------%
 \usepackage{geometry}
-\geometry{a4paper,left=2.05cm,right=2.05cm,top=2.5cm,bottom=2.5cm}
+\geometry{a4paper,left=1.91cm,right=1.91cm,top=2.05cm,bottom=2.05cm}
 %------------------------------------------------------------------------------%
 
 
@@ -12,19 +12,21 @@
 \usepackage[numbers,sort&compress]{natbib}
 \usepackage{clrscode}
 \usepackage{gensymb}
-\usepackage{varwidth}
 %------------------------------------------------------------------------------%
+
 
 %--------------------------------设置标题与目录--------------------------------%
 \usepackage[sf]{titlesec}
 \usepackage{titletoc}
 %------------------------------------------------------------------------------%
 
+
 %--------------------------------添加书签超链接--------------------------------%
 \usepackage[unicode=true,colorlinks=false,pdfborder={0 0 0}]{hyperref}
     % 在此处修改打开文件操作
     \hypersetup{
         bookmarks=true,         % show bookmarks bar?
+        bookmarksopen=true,     % expanded all bookmark?
         pdftoolbar=true,        % show Acrobat’s toolbar?
         pdfmenubar=true,        % show Acrobat’s menu?
         pdffitwindow=true,      % window fit to page when opened
@@ -46,18 +48,20 @@
 %---------------------------------设置字体大小---------------------------------%
 \usepackage{type1cm}
 % 字号与行距，统一前缀s(a.k.a size)
-\newcommand{\sChuhao}{\fontsize{42pt}{63pt}\selectfont}         % 初号, 1.5倍
-\newcommand{\sYihao}{\fontsize{26pt}{36pt}\selectfont}          % 一号, 1.4倍
-\newcommand{\sErhao}{\fontsize{22pt}{28pt}\selectfont}          % 二号, 1.25倍
-\newcommand{\sXiaoer}{\fontsize{18pt}{18pt}\selectfont}         % 小二, 单倍
-\newcommand{\sSanhao}{\fontsize{16pt}{24pt}\selectfont}         % 三号, 1.5倍
-\newcommand{\sXiaosan}{\fontsize{15pt}{22pt}\selectfont}        % 小三, 1.5倍
-\newcommand{\sSihao}{\fontsize{14pt}{21pt}\selectfont}          % 四号, 1.5倍
-\newcommand{\sHalfXiaosi}{\fontsize{13pt}{19.5pt}\selectfont}   % 半小四, 1.5倍
-\newcommand{\sXiaosi}{\fontsize{12pt}{14.4pt}\selectfont}       % 小四, 1.25倍
-\newcommand{\sLargeWuhao}{\fontsize{11pt}{11pt}\selectfont}     % 大五, 单倍
-\newcommand{\sWuhao}{\fontsize{10.5pt}{10.5pt}\selectfont}      % 五号, 单倍
-\newcommand{\sXiaowu}{\fontsize{9pt}{9pt}\selectfont}           % 小五, 单倍
+\newcommand{\sChuhao}{\fontsize{42pt}{63pt}\selectfont}                 % 初号, 1.5倍
+\newcommand{\sYihao}{\fontsize{26pt}{36pt}\selectfont}                  % 一号, 1.4倍
+\newcommand{\sErhao}{\fontsize{22pt}{28pt}\selectfont}                  % 二号, 1.25倍
+\newcommand{\sXiaoer}{\fontsize{18pt}{18pt}\selectfont}                 % 小二, 单倍
+\newcommand{\sSanhao}{\fontsize{16pt}{24pt}\selectfont}                 % 三号, 1.5倍
+\newcommand{\sXiaosan}{\fontsize{15pt}{22pt}\selectfont}                % 小三, 1.5倍
+\newcommand{\sSihao}{\fontsize{14pt}{21pt}\selectfont}                  % 四号, 1.5倍
+\newcommand{\sSHalfXiaosi}{\fontsize{13pt}{19pt}\selectfont}            % 半小四, 1.5倍
+\newcommand{\sHalfXiaosi}{\fontsize{13pt}{16.25pt}\selectfont}          % 半小四, 1.25倍
+\newcommand{\sRealHalfXiaosi}{\fontsize{12.5pt}{16.25pt}\selectfont}    % 模板中的半小四, 1.25倍
+\newcommand{\sXiaosi}{\fontsize{12pt}{14.4pt}\selectfont}               % 小四, 1.25倍
+\newcommand{\sLargeWuhao}{\fontsize{11pt}{11pt}\selectfont}             % 大五, 单倍
+\newcommand{\sWuhao}{\fontsize{10.5pt}{10.5pt}\selectfont}              % 五号, 单倍
+\newcommand{\sXiaowu}{\fontsize{9pt}{9pt}\selectfont}                   % 小五, 单倍
 %------------------------------------------------------------------------------%
 
 
@@ -102,6 +106,8 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{setspace}
+\captionsetup[table]{labelfont=bf,textfont=bf}
+\renewcommand\arraystretch{1.1} % 表格行距
 %------------------------------------------------------------------------------%
 
 
@@ -117,30 +123,31 @@
 \renewcommand\equationautorefname{式}
 \newcommand\myreference[1]{[\ref{#1}]}
 \newcommand\eqrefe[1]{式(\ref{#1})}
-\renewcommand\theequation{\thechapter.\arabic{equation}}
 % 增加 \ucite 命令使显示的引用为上标形式
 \newcommand{\ucite}[1]{$^{\mbox{\scriptsize \cite{#1}}}$}
+\renewcommand\theequation{\thesection.\arabic{equation}}
+\renewcommand{\thefigure}{\thechapter-\arabic{figure}}
+\renewcommand{\thetable}{\thechapter-\arabic{table}}
+%------------------------------------------------------------------------------%
+
+
+%--------------------------------设置定理类环境--------------------------------%
+\usepackage[amsthm,thmmarks]{ntheorem}
 %------------------------------------------------------------------------------%
 
 
 %--------------------------设置中文段落缩进与正文版式--------------------------%
-\XeTeXlinebreaklocale "zh"       %使用中文的换行风格
-\XeTeXlinebreakskip = 0pt plus 1pt    %调整换行逻辑的弹性大小
+\XeTeXlinebreaklocale "zh"                      % 使用中文的换行风格
+\XeTeXlinebreakskip = 0pt plus 1pt              % 调整换行逻辑的弹性大小
+% \usepackage{indentfirst}                        % 段首空格设置
+% \setlength{\parindent}{26pt}                    % 段首空格长度
+% \setlength{\parskip}{3pt plus 1pt minus 1pt}    % 段落间距
+% \renewcommand{\baselinestretch}{1.25}           % 行距
 %------------------------------------------------------------------------------%
 
 %----------------------------设置段落标题与目录格式----------------------------%
-\setcounter{secnumdepth}{4}
-\setcounter{tocdepth}{4}
-
-
-% 正文中标题格式，毋需标号
-% \titleformat{\section}[hang]{\fHei \sf \sSihao}
-%     {\sSihao }{0.5em}{}{}
-% \titleformat{\subsection}[hang]{\fHei \sf \sHalfXiaosi}
-%     {\sHalfXiaosi }{0.5em}{}{}
-% \titleformat{\subsubsection}[hang]{\fHei \sf}
-%     {\thesubsubsection }{0.5em}{}{}
-% 正文中标题格式，需要标号
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
 
 \newcommand\chapterID[1]{第\CJKnumber{#1}章}
 \renewcommand{\chaptername}{第\CJKnumber{\thechapter}章}
@@ -148,13 +155,16 @@
 \renewcommand{\tablename}{表}
 \renewcommand{\bibname}{参考文献}
 \renewcommand{\contentsname}{目~录}
+\newcommand{\keywords}[1]{\\ \\ \textbf{关~键~词}：#1}
 
-
-\titleformat{\chapter}[hang]{\normalfont\sErhao\filcenter\fHei\bf}{\sErhao{\chaptertitlename}}{20pt}{\sErhao}
-\titleformat{\section}[hang]{\fHei \bf \sSanhao}{\sSanhao \thesection}{0.5em}{}{}
-\titleformat{\subsection}[hang]{\fHei \bf \sSihao}{\sSihao \thesubsection}{0.5em}{}{}
-\titleformat{\subsubsection}[hang]{\fHei \bf}{\thesubsubsection }{0.5em}{}{}
-
+\titleformat{\chapter}[hang]{\normalfont\sSanhao\filcenter\fHei\bf}%
+    {\sSanhao{\chaptertitlename}}{20pt}{\sSanhao}
+\titleformat{\section}[hang]{\fHei \bf \sXiaosan}%
+    {\sXiaosan \thesection}{0.5em}{}{}
+\titleformat{\subsection}[hang]{\fHei \bf \sSHalfXiaosi}%
+    {\sSHalfXiaosi \thesubsection}{0.5em}{}{}
+\titleformat{\subsubsection}[hang]{\fHei \bf}%
+    {(\arabic{subsubsection})}{0.5em}{}{}   % 小标题式的subsubsection:(4) 标题
 
 % 缩小正文中各级标题之间的缩进
 \titlespacing{\chapter}{0pt}{3em plus .1em minus .2em}{0.25em}
@@ -163,7 +173,6 @@
 \titlespacing{\subsubsection}{0pt}{0.25em}{0pt}
 
 % 定义目录中各级标题之间的格式以及缩进
-% \dottedcontents{chapter}[0.0em]{\fHei\vspace{0.5em}}{0.0em}{5pt}
 \dottedcontents{section}[1.16cm]{}{1.8em}{5pt}
 \dottedcontents{subsection}[2.00cm]{}{2.7em}{5pt}
 \dottedcontents{subsubsection}[2.86cm]{}{3.4em}{5pt}
@@ -186,10 +195,19 @@
 \usepackage{fancyhdr}
 \usepackage{fancyref}
 \pagestyle{fancy}
-\chead{{\it \shorttitle}}
-\lfoot{}
-\cfoot{\thepage}
-\rfoot{}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptertitlename\ #1}{}}
+\cfoot{}
+\fancyfoot[RO, LE]{--\thepage--}
+\fancyfoot[LO]{{\tt \artversion}}
+\fancyfoot[RE]{{\fNWPU 西北工业大学} \fSong{\it \shorttitle}}
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[RO, LE]{--\thepage--}
+    \fancyfoot[LO]{{\tt \artversion}}
+    \fancyfoot[RE]{{\fNWPU 西北工业大学} \fSong{\it \shorttitle}}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\headwidth}{\textwidth}
 \renewcommand{\footrulewidth}{0pt}
@@ -197,7 +215,7 @@
 
 
 %-------------------------------数学特殊符号控制-------------------------------%
-\input{math-symbols}
+\usepackage{math-symbols}
 %------------------------------------------------------------------------------%
 
 
