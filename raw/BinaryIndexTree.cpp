@@ -31,6 +31,10 @@ template<int Max_Size = 100005> struct BITree {
 
 int n, tmp, ans[32768 >> 1];
 
+// range modification & point query
+// add [L, R] v => add(L, v); add(R + 1, -v);
+// query x => query(x)
+
 int main()
 {
     n = nextInt();

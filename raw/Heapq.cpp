@@ -12,14 +12,14 @@ template<class Compare> class EndFlag<string, Compare> {
 public:
     string value = Compare()("", "~~~~~~~~") ? "": "~~~~~~~~";
 };
-template<class Compare> class EndFlag<Path, Compare> {
-public:
-    int imin = STD_NUM_LIM<int>::min();
-    int imax = STD_NUM_LIM<int>::max();
-    Path pmin = Path(imin, imin);
-    Path pmax = Path(imax, imax);
-    Path value = Compare()(pmin, pmax) ? pmin: pmax;
-};
+// template<class Compare> class EndFlag<Path, Compare> {
+// public:
+//     int imin = STD_NUM_LIM<int>::min();
+//     int imax = STD_NUM_LIM<int>::max();
+//     Path pmin = Path(imin, imin);
+//     Path pmax = Path(imax, imax);
+//     Path value = Compare()(pmin, pmax) ? pmin: pmax;
+// };
 #undef STD_NUM_LIM
 /// End as namespace Type EndFlag
 
@@ -116,7 +116,7 @@ int main()
         hpq.erase(2); hpq.__dbg__();
     }
     {
-        Heapq<string, less<string> > hpq2;
+        Heapq<string, greater<string> > hpq2;
         for (string e : {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j"})
         {
             hpq2.push(string(e));

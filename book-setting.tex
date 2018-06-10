@@ -125,7 +125,6 @@
 \newcommand\eqrefe[1]{式(\ref{#1})}
 % 增加 \ucite 命令使显示的引用为上标形式
 \newcommand{\ucite}[1]{$^{\mbox{\scriptsize \cite{#1}}}$}
-\renewcommand\theequation{\thesection.\arabic{equation}}
 \renewcommand{\thefigure}{\thechapter-\arabic{figure}}
 \renewcommand{\thetable}{\thechapter-\arabic{table}}
 %------------------------------------------------------------------------------%
@@ -144,6 +143,7 @@
 % \setlength{\parskip}{3pt plus 1pt minus 1pt}    % 段落间距
 % \renewcommand{\baselinestretch}{1.25}           % 行距
 %------------------------------------------------------------------------------%
+
 
 %----------------------------设置段落标题与目录格式----------------------------%
 \setcounter{secnumdepth}{3}
@@ -188,8 +188,8 @@
   {\if@openright\cleardoublepage\else\clearpage\fi}{\par\relax}
   {}{}
 \makeatother
-
 %------------------------------------------------------------------------------%
+
 
 %---------------------------------设置页眉页脚---------------------------------%
 \usepackage{fancyhdr}
@@ -216,11 +216,6 @@
 
 %-------------------------------数学特殊符号控制-------------------------------%
 \usepackage{math-symbols}
-%------------------------------------------------------------------------------%
-
-
-%---------------------------------添加列表控制---------------------------------%
-\usepackage{enumerate}
 \numberwithin{equation}{section}
 \renewcommand\theequation{\thesection.\arabic{equation}}
 %------------------------------------------------------------------------------%

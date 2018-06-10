@@ -160,7 +160,5 @@ template<typename Tp, int Max_Size = 100005> struct RedBlackTree {
 		if (!y->color) del_fix(x);
 		stack[stack_ptr++] = y;
 	}
-
-
 };
 /// End as namespace RedBlackTree

@@ -1,7 +1,7 @@
 TEX      = xelatex
 MAIN     = scloac
 
-target: close wipe clean tex clean open
+target: close wipe clean tex open
 
 tex: $(MAIN).tex
 	$(TEX) $<
